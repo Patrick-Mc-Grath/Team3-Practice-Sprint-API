@@ -1,3 +1,3 @@
 public class Test {
-    private int TestVariable;
+    private int TestVariables;
 }
