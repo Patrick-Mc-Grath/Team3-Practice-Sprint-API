@@ -16,7 +16,7 @@ public class JobRoleDao
 
         ResultSet rs = st.executeQuery(
                 "SELECT * "
-                        + "FROM job_roles;");
+                        + "FROM Job_Roles;");
 
         List<JobRole> jobRoles = new ArrayList<>();
 
