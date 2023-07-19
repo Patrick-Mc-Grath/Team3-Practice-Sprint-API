@@ -15,19 +15,19 @@ public class JobRoleDao
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery(
-                "SELECT * "
-                        + "FROM Job_Roles;");
+                "SELECT role_id, role_title, spec_link"
+                        + " FROM Job_Roles;");
 
         List<JobRole> jobRoles = new ArrayList<>();
 
         while (rs.next()) {
-            JobRole employee = new JobRole(
-                    rs.getDouble("salary"),
-                    rs.getInt("roleID"),
-                    rs.getString("role_title")
+            JobRole jobRole = new JobRole(
+                    rs.getInt("role_id"),
+                    rs.getString("role_title"),
+                    rs.getString("spec_link")
             );
 
-            jobRoles.add(employee);
+            jobRoles.add(jobRole);
         }
         return jobRoles;
     }

@@ -5,28 +5,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobRole
 {
-    private int roleID;
+    private int roleId;
 
     private String roleTitle;
 
-    private double salary;
+    private String link;
+
 
     @JsonCreator
-    public JobRole(@JsonProperty("salary") double salary,
-                   @JsonProperty("roleID") int roleID,
-                   @JsonProperty("role_title") String roleTitle )
+    public JobRole(
+                   @JsonProperty("role_id") int roleId,
+                   @JsonProperty("role_title") String roleTitle,
+                   @JsonProperty("spec_link") String link)
     {
-        setRoleID(roleID);
+        setRoleId(roleId);
         setRoleTitle(roleTitle);
-        setSalary(salary);
+        setLink(link);
     }
 
-    public int getRoleID() {
-        return roleID;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
+    public void setRoleId(int roleID) {
+        this.roleId = roleID;
     }
 
     public String getRoleTitle() {
@@ -37,11 +39,12 @@ public class JobRole
         this.roleTitle = roleTitle;
     }
 
-    public double getSalary() {
-        return salary;
+
+    public String getLink() {
+        return link;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public void setLink(String link) {
+        this.link = link;
     }
 }
