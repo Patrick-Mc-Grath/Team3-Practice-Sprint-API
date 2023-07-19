@@ -1,5 +1,6 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.TrainingRequest;
 import com.kainos.ea.util.DatabaseConnector;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class TrainingDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public List<TrainingRequest> getTrainingByBand(int bandId) throws SQLException {
+    public List<TrainingRequest> getTrainingByBand(int bandId) throws SQLException, DatabaseConnectionException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 

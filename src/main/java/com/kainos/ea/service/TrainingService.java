@@ -1,6 +1,7 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.dao.TrainingDao;
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.FailedToGetTrainingException;
 import com.kainos.ea.exception.TrainingDoesNotExistException;
 import com.kainos.ea.model.TrainingRequest;
@@ -20,7 +21,7 @@ public class TrainingService {
             }
 
             return trainingList;
-        } catch (SQLException e) {
+        } catch (SQLException | DatabaseConnectionException e) {
             System.err.println(e.getMessage());
 
             throw new FailedToGetTrainingException();
