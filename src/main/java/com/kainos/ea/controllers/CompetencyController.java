@@ -1,5 +1,7 @@
 package com.kainos.ea.controllers;
 
+import com.kainos.ea.db.CompetencyDao;
+import com.kainos.ea.db.DatabaseConnector;
 import com.kainos.ea.service.CompetencyService;
 import com.kainos.ea.client.FailedToGetCompsException;
 import io.swagger.annotations.Api;
@@ -14,7 +16,7 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class CompetencyController {
 
-    private CompetencyService competencyService = new CompetencyService();
+    private CompetencyService competencyService = new CompetencyService(new CompetencyDao(), new DatabaseConnector());
 
     @GET
     @Path("/competencies")

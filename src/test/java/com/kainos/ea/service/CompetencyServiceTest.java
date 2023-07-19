@@ -23,7 +23,7 @@ public class CompetencyServiceTest {
 
     CompetencyDao compDao = Mockito.mock(CompetencyDao.class);
     DatabaseConnector dbConnector = Mockito.mock(DatabaseConnector.class);
-    CompetencyService compService = new CompetencyService();
+    CompetencyService compService = new CompetencyService(compDao, dbConnector);
     List<CompetencyRequest> comps = new ArrayList<>();
     Connection connection;
 
@@ -37,16 +37,16 @@ public class CompetencyServiceTest {
 
 
     @Test
-    void getCompsWithBand_shouldThrowSQLException_whenDaoThrowsSQLException() throws SQLException, DatabaseConnectionException {
+    void getCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsSQLException() throws SQLException, DatabaseConnectionException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
         Mockito.when(compDao.getAllCompsAndBand(connection)).thenThrow(SQLException.class);
 
-        assertThrows(SQLException.class,
+        assertThrows(FailedToGetCompsException.class,
                 () -> compService.getAllCompsWithBand());
     }
 
     @Test
-    void getAllCompsWithBand_shouldThrowDatabaseConnectionException_whenDaoThrowsDatabaseConnectionException() throws SQLException, DatabaseConnectionException {
+    void getAllCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsDatabaseConnectionException() throws SQLException, DatabaseConnectionException {
         Mockito.when(dbConnector.getConnection()).thenReturn(conn);
         Mockito.when(compDao.getAllCompsAndBand(conn)).thenThrow(DatabaseConnectionException.class);
 

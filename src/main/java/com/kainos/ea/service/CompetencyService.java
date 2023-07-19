@@ -13,12 +13,17 @@ import java.util.List;
 
 public class CompetencyService {
 
-    private CompetencyDao compDao = new CompetencyDao();
+    private DatabaseConnector dbConnector;
+    private CompetencyDao compDao;
+
+    public CompetencyService(CompetencyDao compDao, DatabaseConnector dbConnector) {
+        this.compDao = compDao;
+        this.dbConnector = dbConnector;
+    }
 
     public List<CompetencyRequest> getAllCompsWithBand() throws FailedToGetCompsException {
         List<CompetencyRequest> competencyList = null;
         try {
-            DatabaseConnector dbConnector = new DatabaseConnector();
             Connection conn = dbConnector.getConnection();
             competencyList = compDao.getAllCompsAndBand(conn);
             return competencyList;
