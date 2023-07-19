@@ -15,9 +15,9 @@ public class JobRoleDao
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery(
-                "SELECT role_id, role_title, Capabilities.name, spec_link, spec_summary"
-                + "FROM Job_Roles" +
-                 "INNER JOIN Capabilities on Job_Roles.role_id = Capabilities.job_role_id;");
+                " SELECT role_id, role_title, Capabilities.name, spec_link, spec_summary"
+                + " FROM Job_Roles" +
+                 " INNER JOIN Capabilities on Job_Roles.role_id = Capabilities.job_role_id;");
 
         List<JobRole> jobRoles = new ArrayList<>();
 
@@ -29,7 +29,6 @@ public class JobRoleDao
                     rs.getString("spec_link"),
                     rs.getString("spec_summary")
             );
-
             jobRoles.add(employee);
         }
         return jobRoles;
