@@ -22,10 +22,10 @@ public class CapabilitiesDao {
 
         while (rs.next()) {
             Capabilities capabilities = new Capabilities(
-                    rs.getInt("CapabilityId"),
-                    rs.getString("Name"),
-                    rs.getString("Description"),
-                    rs.getInt("JobRoleId")
+                    rs.getInt("capability_id"),
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getInt("job_role_id")
             );
 
             capabilitiesList.add(capabilities);
