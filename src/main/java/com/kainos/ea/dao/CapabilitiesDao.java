@@ -15,8 +15,9 @@ public class CapabilitiesDao {
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery(
-                "SELECT * "
-                        + "FROM Capabilities;");
+                "SELECT capability_id, name, description, Job_Roles.role_title "
+                        + "FROM Capabilities" +
+                        "   INNER JOIN Job_Roles on Capabilities.job_role_id = Job_Roles.role_id;");
 
         List<Capabilities> capabilitiesList = new ArrayList<>();
 
@@ -25,7 +26,7 @@ public class CapabilitiesDao {
                     rs.getInt("capability_id"),
                     rs.getString("name"),
                     rs.getString("description"),
-                    rs.getInt("job_role_id")
+                    rs.getString("role_title")
             );
 
             capabilitiesList.add(capabilities);
