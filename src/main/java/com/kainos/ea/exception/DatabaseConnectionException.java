@@ -5,3 +5,4 @@ public class DatabaseConnectionException extends Throwable {
         super(e);
     }
 }
+

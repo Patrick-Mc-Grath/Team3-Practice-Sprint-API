@@ -14,4 +14,3 @@ public class WebService {
         return "Hello from a RESTful Web service: " + message;
     }
 }
-
