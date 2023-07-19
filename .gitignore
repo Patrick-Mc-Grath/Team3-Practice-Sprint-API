@@ -27,3 +27,5 @@ target/*
 .idea/workspace.xml
 
 .DS_Store
+
+db.properties

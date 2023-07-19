@@ -1,5 +1,6 @@
 package com.kainos.ea;
 
+import com.kainos.ea.controllers.CompetencyController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -30,6 +31,7 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     @Override
     public void run(final WebServiceConfiguration configuration,
                     final Environment environment) {
+        environment.jersey().register(new CompetencyController());
     }
 
 }
