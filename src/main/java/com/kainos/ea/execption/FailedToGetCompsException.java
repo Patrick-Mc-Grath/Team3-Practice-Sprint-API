@@ -4,7 +4,7 @@ public class FailedToGetCompsException extends Throwable {
 
     @Override
     public String getMessage() {
-        return "Failed to get orders from Database";
+        return "Failed to get comps from Database";
     }
 
 }

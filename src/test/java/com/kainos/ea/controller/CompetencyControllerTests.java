@@ -21,12 +21,10 @@ import java.sql.SQLException;
     @ExtendWith(DropwizardExtensionsSupport.class)
     public class CompetencyControllerTests
     {
-        CompetencyDao compDao = Mockito.mock(CompetencyDao.class);
-        DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
 
-        CompetencyController compController = new CompetencyController();
+        CompetencyService compService = Mockito.mock(CompetencyService.class);
 
-        CompetencyService compService = new CompetencyService(compDao, databaseConnector);
+        CompetencyController compController = new CompetencyController(compService);
 
         Connection conn;
 
@@ -36,21 +34,10 @@ import java.sql.SQLException;
         );
 
         @Test
-        void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException, FailedToGetCompsException {
-            Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-            Mockito.when(compService.getAllCompsWithBand(1)).thenThrow(new SQLException());
-
+        void check_for_failedToGetCompsException() throws  FailedToGetCompsException {
+            Mockito.when(compService.getAllCompsWithBand(1)).thenThrow(new FailedToGetCompsException());
             Response response = compController.getCompetenciesWithBand(1);
-            Assertions.assertEquals(200,response.getStatus());
-        }
-
-        @Test
-        void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException, FailedToGetCompsException
-        {
-            Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
-
-            Response response = compController.getCompetenciesWithBand(1);
-            Assertions.assertEquals(200,response.getStatus());
+            Assertions.assertEquals(500,response.getStatus());
         }
 
     }

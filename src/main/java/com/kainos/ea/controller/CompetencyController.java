@@ -17,7 +17,15 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class CompetencyController {
 
-    private CompetencyService competencyService = new CompetencyService(new CompetencyDao(), new DatabaseConnector());
+    private CompetencyService competencyService;
+
+    public CompetencyController() {
+        competencyService = new CompetencyService(new CompetencyDao(), new DatabaseConnector());
+    }
+
+    public CompetencyController(CompetencyService competencyService) {
+        this.competencyService = competencyService;
+    }
 
     @GET
     @Path("/competencies/{bandId}")
