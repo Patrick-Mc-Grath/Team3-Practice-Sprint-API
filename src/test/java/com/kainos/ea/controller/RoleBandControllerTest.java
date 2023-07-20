@@ -31,6 +31,8 @@ public class RoleBandControllerTest {
     RoleBandController roleBandController = new RoleBandController();
     Connection conn;
 
+
+
     @Test
     public void getRoleBands_shouldReturnOK_whenServiceReturnsRoleBandResponse() throws DatabaseConnectionException, SQLException, FailedToGetRoleBandsException {
 
