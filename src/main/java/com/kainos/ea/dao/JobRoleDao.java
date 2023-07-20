@@ -25,7 +25,7 @@ public class JobRoleDao
             JobRole employee = new JobRole(
                     rs.getInt("role_id"),
                     rs.getString("role_title"),
-                    rs.getString("name"),
+                    rs.getString("Capabilities.name"),
                     rs.getString("spec_link"),
                     rs.getString("spec_summary")
             );
