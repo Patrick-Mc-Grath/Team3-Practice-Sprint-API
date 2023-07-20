@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockitoExtension.class)
-class jobRoleServiceTest {
+class JobRoleServiceTest {
 
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
@@ -41,6 +41,14 @@ class jobRoleServiceTest {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRoleDao.getRoles(conn)).thenThrow(SQLException.class);
         assertThrows(SQLException.class,
+                () -> jobRoleService.getJobRoles());
+    }
+
+    @Test
+    void checkDatabaseConnectionException() throws DatabaseConnectionException, SQLException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+        assertThrows(DatabaseConnectionException.class,
                 () -> jobRoleService.getJobRoles());
     }
 
