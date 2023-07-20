@@ -7,7 +7,7 @@ public class JobRole {
 
     private int role_Id;
 
-    private String role_title;
+    private String roleTitle;
 
     private String spec_link;
 
@@ -24,11 +24,11 @@ public class JobRole {
     }
 
     public String getRoleTitle() {
-        return role_title;
+        return roleTitle;
     }
 
-    public void setRole_title(String role_title) {
-        this.role_title = role_title;
+    public void setRoleTitle(String roleTitle) {
+        this.roleTitle = roleTitle;
     }
 
     public String getSpec_link() {
@@ -57,13 +57,13 @@ public class JobRole {
 
     @JsonCreator
     public JobRole(@JsonProperty("role_id") int roleID,
-                   @JsonProperty("role_title") String roleTitle,
-                   @JsonProperty("name") String capabilityName,
+                   @JsonProperty("role_title") String role_title,
+                   @JsonProperty("Capability.name") String capabilityName,
                    @JsonProperty("spec_link") String specLink,
                    @JsonProperty("spec_summary") String specSummary) {
         
         setRole_Id(roleID);
-        setRole_title(roleTitle);
+        setRoleTitle(role_title);
         setCapability_name(capabilityName);
         setSpec_link(specLink);
         setSpec_summary(specSummary);

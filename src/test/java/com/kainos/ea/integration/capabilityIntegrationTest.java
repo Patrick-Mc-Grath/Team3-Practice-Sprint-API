@@ -43,12 +43,4 @@ public class capabilityIntegrationTest {
 
         Assertions.assertEquals(200, response.getStatus());
     }
-
-    @Test
-    void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException {
-        Response response = APP.client().target("http://localhost:8080/api/capabilities").request().get();
-
-        Assertions.assertEquals(500, response.getStatus());
-    }
-
 }

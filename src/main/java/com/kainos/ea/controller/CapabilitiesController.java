@@ -18,13 +18,17 @@ import java.sql.SQLException;
 
 public class CapabilitiesController {
 
-    private static CapabilitiesService capabilitiesService;
+    private  CapabilitiesService capabilitiesService;
 
     public CapabilitiesController()
     {
         capabilitiesService = new CapabilitiesService(new CapabilitiesDao(), new DatabaseConnector());
     }
 
+    public CapabilitiesController(CapabilitiesService capabilitiesService)
+    {
+        this.capabilitiesService = capabilitiesService;
+    }
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)
