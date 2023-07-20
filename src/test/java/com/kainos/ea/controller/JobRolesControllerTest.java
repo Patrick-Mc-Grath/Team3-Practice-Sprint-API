@@ -24,6 +24,8 @@ public class JobRolesControllerTest
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
 
+    JobRolesController jobRolesController = new JobRolesController();
+
     JobRoleService jobRoleService = new JobRoleService(jobRoleDao,databaseConnector);
 
     Connection conn;
@@ -38,8 +40,17 @@ public class JobRolesControllerTest
     {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRoleService.getJobRoles()).thenThrow(new SQLException());
-        Response response = APP.client().target("http://localhost:8080/api/job-roles").request().get();
 
+        Response response = jobRolesController.getJobRoles();
+        Assertions.assertEquals(500,response.getStatus());
+    }
+
+    @Test
+    void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+
+        Response response = jobRolesController.getJobRoles();
         Assertions.assertEquals(500,response.getStatus());
     }
 

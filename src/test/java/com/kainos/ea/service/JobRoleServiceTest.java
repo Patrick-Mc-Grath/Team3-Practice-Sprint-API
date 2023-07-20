@@ -44,4 +44,12 @@ class JobRoleServiceTest {
                 () -> jobRoleService.getJobRoles());
     }
 
+    @Test
+    void checkDatabaseConnectionException() throws DatabaseConnectionException, SQLException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+        assertThrows(DatabaseConnectionException.class,
+                () -> jobRoleService.getJobRoles());
+    }
+
 }
