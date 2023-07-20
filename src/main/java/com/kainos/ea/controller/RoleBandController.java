@@ -25,10 +25,14 @@ import java.util.List;
 
 public class RoleBandController{
 
-    private static RoleBandService roleBandService;
+    private RoleBandService roleBandService;
 
     public RoleBandController(){
         roleBandService = new RoleBandService(new RoleBandDao(), new DatabaseConnector());
+    }
+
+    public RoleBandController(RoleBandService roleBandService){
+        this.roleBandService = roleBandService;
     }
 
     @GET
@@ -38,10 +42,8 @@ public class RoleBandController{
         try {
             List<RoleBandResponse> roleBandList = roleBandService.getRoleBands();
             return Response.ok().entity(roleBandList).build();
-        } catch (DatabaseConnectionException e) {
-            return Response.serverError().entity("DB error").build();
-        } catch (FailedToGetRoleBandsException e) {
-            return Response.serverError().entity("SQL error").build();
+        } catch (DatabaseConnectionException | FailedToGetRoleBandsException e) {
+            return Response.serverError().build();
         }
     }
 
