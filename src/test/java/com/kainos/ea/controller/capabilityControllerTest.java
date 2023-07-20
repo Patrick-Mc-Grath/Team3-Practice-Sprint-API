@@ -2,7 +2,6 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.controller.CapabilitiesController;
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.service.CapabilitiesService;
@@ -13,7 +12,6 @@ import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import javax.ws.rs.core.Response;
@@ -37,4 +35,23 @@ class capabilityControllerTest {
             WebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
+
+    @Test
+    void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new SQLException());
+
+        Response response = capabilitiesController.getCapabilities();
+        Assertions.assertEquals(500,response.getStatus());
+    }
+
+    @Test
+    void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+
+        Response response = capabilitiesController.getCapabilities();
+        Assertions.assertEquals(500,response.getStatus());
+    }
 }
