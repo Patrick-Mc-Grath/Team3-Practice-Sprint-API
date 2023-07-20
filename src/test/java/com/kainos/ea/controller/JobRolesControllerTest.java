@@ -21,14 +21,9 @@ import java.sql.SQLException;
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRolesControllerTest
 {
-    JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
-    DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
+    JobRoleService jobRoleService = Mockito.mock(JobRoleService.class);
 
-    JobRolesController jobRolesController = new JobRolesController();
-
-    JobRoleService jobRoleService = new JobRoleService(jobRoleDao,databaseConnector);
-
-    Connection conn;
+    JobRolesController jobRolesController = new JobRolesController(jobRoleService);
 
     static final DropwizardAppExtension<WebServiceConfiguration> APP = new DropwizardAppExtension<>(
             WebServiceApplication.class, null,
@@ -38,7 +33,6 @@ public class JobRolesControllerTest
     @Test
     void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException
     {
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRoleService.getJobRoles()).thenThrow(new SQLException());
 
         Response response = jobRolesController.getJobRoles();
@@ -48,7 +42,7 @@ public class JobRolesControllerTest
     @Test
     void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException
     {
-        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+        Mockito.when(jobRoleService.getJobRoles()).thenThrow(DatabaseConnectionException.class);
 
         Response response = jobRolesController.getJobRoles();
         Assertions.assertEquals(500,response.getStatus());

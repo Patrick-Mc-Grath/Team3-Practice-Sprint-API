@@ -16,10 +16,15 @@ import java.sql.SQLException;
 @Path("/api")
 public class JobRolesController
 {
-    private static JobRoleService jobRoleService;
+    private JobRoleService jobRoleService;
     public JobRolesController()
     {
-        jobRoleService = new JobRoleService(new JobRoleDao(),new DatabaseConnector());
+        jobRoleService = new JobRoleService(new JobRoleDao(), new DatabaseConnector());
+    }
+
+    public JobRolesController(JobRoleService jobRoleService)
+    {
+        this.jobRoleService = jobRoleService;
     }
 
     @GET
