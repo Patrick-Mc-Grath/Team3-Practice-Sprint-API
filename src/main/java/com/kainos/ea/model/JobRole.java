@@ -36,7 +36,7 @@ public class JobRole
         this.role_title = roleTitle;
     }
 
-    public String getLink() {
+    public String getSpecLink() {
         return spec_link;
     }
 

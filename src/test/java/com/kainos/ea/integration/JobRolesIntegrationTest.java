@@ -28,15 +28,14 @@ public class JobRolesIntegrationTest {
     );
 
     @Test
-    void getEmployees_shouldReturnListOfEmployees() throws IOException {
+    void getEmployees_shouldReturnListOfEmployees()  {
         ObjectMapper mapper = new ObjectMapper();
         List<JobRole> response = APP.client().target("http://localhost:8080/api/job-roles")
                 .request()
                 .get(List.class);
-
-
         Assertions.assertTrue(response.size() > 0);
         List<JobRole> pojos = mapper.convertValue(response, new TypeReference<List<JobRole>>() { });
+        Assertions.assertEquals("Software Engineer", pojos.get(0).getRoleTitle());
         Assertions.assertEquals(200, APP.client().target("http://localhost:8080/api/job-roles")
                 .request()
                 .get().getStatus());
