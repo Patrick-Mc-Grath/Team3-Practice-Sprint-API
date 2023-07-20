@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import static com.kainos.ea.db.DatabaseConnector.conn;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -26,32 +25,33 @@ public class CompetencyServiceTest {
     CompetencyService compService = new CompetencyService(compDao, dbConnector);
     List<CompetencyRequest> comps = new ArrayList<>();
     Connection connection;
+    int bandId = 1;
 
     @Test
     void getCompsWithBand_shouldReturnAListOfComps_whenDaoReturnsListOfComps() throws SQLException, DatabaseConnectionException, FailedToGetCompsException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
-        Mockito.when(compDao.getAllCompsAndBand(connection)).thenReturn(comps);
+        Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenReturn(comps);
 
-        assertEquals(comps, compService.getAllCompsWithBand());
+        assertEquals(comps, compService.getAllCompsWithBand(bandId));
     }
 
 
     @Test
     void getCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsSQLException() throws SQLException, DatabaseConnectionException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
-        Mockito.when(compDao.getAllCompsAndBand(connection)).thenThrow(SQLException.class);
+        Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenThrow(SQLException.class);
 
         assertThrows(FailedToGetCompsException.class,
-                () -> compService.getAllCompsWithBand());
+                () -> compService.getAllCompsWithBand(bandId));
     }
 
     @Test
     void getAllCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsDatabaseConnectionException() throws SQLException, DatabaseConnectionException {
-        Mockito.when(dbConnector.getConnection()).thenReturn(conn);
-        Mockito.when(compDao.getAllCompsAndBand(conn)).thenThrow(DatabaseConnectionException.class);
+        Mockito.when(dbConnector.getConnection()).thenReturn(connection);
+        Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenThrow(DatabaseConnectionException.class);
 
         assertThrows(FailedToGetCompsException.class,
-                () -> compService.getAllCompsWithBand());
+                () -> compService.getAllCompsWithBand(bandId));
     }
 
 

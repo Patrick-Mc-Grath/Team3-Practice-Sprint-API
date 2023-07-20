@@ -14,10 +14,10 @@ import com.kainos.ea.db.DatabaseConnector;
 
 public class CompetencyDao {
 
-    public List<CompetencyRequest> getAllCompsAndBand(Connection c) throws SQLException, DatabaseConnectionException {
+    public List<CompetencyRequest> getAllCompsAndBand(int bandId, Connection c) throws SQLException, DatabaseConnectionException {
             Statement st = c.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT Name, Description, band_name FROM Competencies JOIN Band_Competencies ON Competencies.CompetencyId = Band_Competencies.CompetencyId JOIN Bands ON Bands.band_id = Band_Competencies.BandId;");
+            ResultSet rs = st.executeQuery("SELECT Name, Description, band_name FROM Competencies JOIN Band_Competencies ON Competencies.CompetencyId = Band_Competencies.CompetencyId JOIN Bands ON Bands.band_id = Band_Competencies.BandId WHERE Band_Id = " + bandId);
 
             List<CompetencyRequest> competencyList = new ArrayList<>();
 

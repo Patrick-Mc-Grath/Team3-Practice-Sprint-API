@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,13 +20,13 @@ public class CompetencyController {
     private CompetencyService competencyService = new CompetencyService(new CompetencyDao(), new DatabaseConnector());
 
     @GET
-    @Path("/competencies")
+    @Path("/competencies/{bandId}")
     @Produces(MediaType.APPLICATION_JSON)
 
-    public Response getCompetenciesWithBand() {
+    public Response getCompetenciesWithBand(@PathParam("bandId") int bandId) {
 
         try {
-            return Response.ok(competencyService.getAllCompsWithBand()).build();
+            return Response.ok(competencyService.getAllCompsWithBand(bandId)).build();
         } catch (FailedToGetCompsException e) {
             System.err.println(e.getMessage());
 

@@ -21,11 +21,11 @@ public class CompetencyService {
         this.dbConnector = dbConnector;
     }
 
-    public List<CompetencyRequest> getAllCompsWithBand() throws FailedToGetCompsException {
+    public List<CompetencyRequest> getAllCompsWithBand(int bandId) throws FailedToGetCompsException {
         List<CompetencyRequest> competencyList = null;
         try {
             Connection conn = dbConnector.getConnection();
-            competencyList = compDao.getAllCompsAndBand(conn);
+            competencyList = compDao.getAllCompsAndBand(bandId, conn);
             return competencyList;
         } catch (SQLException | DatabaseConnectionException e) {
             System.err.println(e.getMessage());
