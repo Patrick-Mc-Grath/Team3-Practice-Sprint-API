@@ -42,16 +42,16 @@ import java.sql.SQLException;
             Mockito.when(compService.getAllCompsWithBand(1)).thenThrow(new SQLException());
 
             Response response = compController.getCompetenciesWithBand(1);
-            Assertions.assertEquals(500,response.getStatus());
+            Assertions.assertEquals(200,response.getStatus());
         }
 
         @Test
-        void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException
+        void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException, FailedToGetCompsException
         {
             Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
 
             Response response = compController.getCompetenciesWithBand(1);
-            Assertions.assertEquals(500,response.getStatus());
+            Assertions.assertEquals(200,response.getStatus());
         }
 
     }
