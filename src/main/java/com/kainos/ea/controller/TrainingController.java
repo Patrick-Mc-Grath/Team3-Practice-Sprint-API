@@ -21,11 +21,14 @@ import java.sql.SQLException;
 @Path("/api")
 public class TrainingController {
 
-    private static TrainingService trainingService;
+    private TrainingService trainingService;
 
     public TrainingController() {
-        DatabaseConnector databaseConnector = new DatabaseConnector();
-        trainingService = new TrainingService(new TrainingDao(), databaseConnector);
+        trainingService = new TrainingService(new TrainingDao(), new DatabaseConnector());
+    }
+
+    public TrainingController(TrainingService trainingService) {
+        this.trainingService = trainingService;
     }
 
     @GET

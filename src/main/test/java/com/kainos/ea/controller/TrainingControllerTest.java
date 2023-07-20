@@ -27,7 +27,7 @@ public class TrainingControllerTest {
     TrainingDao trainingDao = Mockito.mock(TrainingDao.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
     TrainingService trainingService = Mockito.mock(TrainingService.class);
-    TrainingController trainingController = Mockito.mock(TrainingController.class);
+    TrainingController trainingController = new TrainingController(trainingService);
     Connection conn;
 
     @Test
@@ -56,6 +56,30 @@ public class TrainingControllerTest {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(trainingDao.getTrainingByBand(bandId, conn)).thenReturn(trainingList);
         Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(TrainingDoesNotExistException.class);
+
+        int actual = trainingController.getTrainingByBand(bandId).getStatus();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getTrainingByBand_shouldReturn500_whenServiceThrowsSqlException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
+        int bandId = 1;
+        int expected = 500;
+
+        Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(SQLException.class);
+
+        int actual = trainingController.getTrainingByBand(bandId).getStatus();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getTrainingByBand_shouldReturn500_whenServiceThrowsDatabaseConnectionException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
+        int bandId = 1;
+        int expected = 500;
+
+        Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(DatabaseConnectionException.class);
 
         int actual = trainingController.getTrainingByBand(bandId).getStatus();
 
