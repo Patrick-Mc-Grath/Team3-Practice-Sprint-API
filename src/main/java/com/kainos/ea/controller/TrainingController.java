@@ -1,9 +1,13 @@
 package com.kainos.ea.controller;
 
+import com.kainos.ea.dao.TrainingDao;
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.FailedToGetTrainingException;
 import com.kainos.ea.exception.TrainingDoesNotExistException;
 import com.kainos.ea.service.TrainingService;
+import com.kainos.ea.util.DatabaseConnector;
 import io.swagger.annotations.Api;
+import org.eclipse.jetty.http.HttpStatus;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,23 +15,30 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Api("Training")
 @Path("/api")
 public class TrainingController {
 
-    TrainingService trainingService = new TrainingService();
+    private static TrainingService trainingService;
+
+    public TrainingController() {
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        trainingService = new TrainingService(new TrainingDao(), databaseConnector);
+    }
 
     @GET
     @Path("/training/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTrainingByBand(@PathParam("id") int bandId) {
         try{
-            return Response.ok(trainingService.getTrainingByBand(bandId)).build();
-        } catch (FailedToGetTrainingException e) {
-            return Response.serverError().build();
+            return Response.status(HttpStatus.OK_200).entity(trainingService.getTrainingByBand(bandId)).build();
         } catch (TrainingDoesNotExistException e) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            return Response.status(HttpStatus.BAD_REQUEST_400).build();
+        } catch (SQLException | DatabaseConnectionException e) {
+            System.err.println(e.getMessage());
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
 
