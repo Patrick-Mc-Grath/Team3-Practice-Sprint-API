@@ -1,6 +1,6 @@
 package com.kainos.ea;
 
-import com.kainos.ea.controllers.CompetencyController;
+import com.kainos.ea.controller.CompetencyController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;

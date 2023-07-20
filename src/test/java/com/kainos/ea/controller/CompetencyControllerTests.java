@@ -2,11 +2,10 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.client.DatabaseConnectionException;
-import com.kainos.ea.client.FailedToGetCompsException;
-import com.kainos.ea.controllers.CompetencyController;
-import com.kainos.ea.db.CompetencyDao;
-import com.kainos.ea.db.DatabaseConnector;
+import com.kainos.ea.execption.DatabaseConnectionException;
+import com.kainos.ea.execption.FailedToGetCompsException;
+import com.kainos.ea.dao.CompetencyDao;
+import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.service.CompetencyService;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;

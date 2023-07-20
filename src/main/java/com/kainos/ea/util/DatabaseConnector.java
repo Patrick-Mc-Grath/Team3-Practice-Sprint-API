@@ -1,6 +1,6 @@
-package com.kainos.ea.db;
+package com.kainos.ea.util;
 
-import com.kainos.ea.client.DatabaseConnectionException;
+import com.kainos.ea.execption.DatabaseConnectionException;
 
 
 import java.sql.Connection;

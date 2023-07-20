@@ -1,4 +1,4 @@
-package com.kainos.ea.cli;
+package com.kainos.ea.model;
 
 public class CompetencyRequest {
 

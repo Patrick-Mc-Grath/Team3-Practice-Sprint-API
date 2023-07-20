@@ -1,7 +1,7 @@
-package com.kainos.ea.db;
+package com.kainos.ea.dao;
 
-import com.kainos.ea.cli.CompetencyRequest;
-import com.kainos.ea.client.DatabaseConnectionException;
+import com.kainos.ea.model.CompetencyRequest;
+import com.kainos.ea.execption.DatabaseConnectionException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.kainos.ea.db.DatabaseConnector;
 
 public class CompetencyDao {
 

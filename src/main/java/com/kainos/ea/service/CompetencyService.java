@@ -1,9 +1,9 @@
 package com.kainos.ea.service;
-import com.kainos.ea.client.DatabaseConnectionException;
-import com.kainos.ea.db.CompetencyDao;
-import com.kainos.ea.cli.CompetencyRequest;
-import com.kainos.ea.client.FailedToGetCompsException;
-import com.kainos.ea.db.DatabaseConnector;
+import com.kainos.ea.execption.DatabaseConnectionException;
+import com.kainos.ea.dao.CompetencyDao;
+import com.kainos.ea.model.CompetencyRequest;
+import com.kainos.ea.execption.FailedToGetCompsException;
+import com.kainos.ea.util.DatabaseConnector;
 
 
 import java.sql.Connection;

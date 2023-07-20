@@ -1,9 +1,9 @@
-package com.kainos.ea.controllers;
+package com.kainos.ea.controller;
 
-import com.kainos.ea.db.CompetencyDao;
-import com.kainos.ea.db.DatabaseConnector;
+import com.kainos.ea.dao.CompetencyDao;
+import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.service.CompetencyService;
-import com.kainos.ea.client.FailedToGetCompsException;
+import com.kainos.ea.execption.FailedToGetCompsException;
 import io.swagger.annotations.Api;
 
 import javax.ws.rs.GET;
