@@ -20,10 +20,10 @@ public class DatabaseConnector {
         }
 
         try {
-            user = System.getenv("DB_USERNAME");
-            password = System.getenv("DB_PASSWORD");
-            host = System.getenv("DB_HOST");
-            database = System.getenv("DB_NAME");
+            user            = System.getenv("DB_USERNAME");
+            password        = System.getenv("DB_PASSWORD");
+            host            = System.getenv("DB_HOST");
+            database        = System.getenv("DB_NAME");
 
             if (user == null || password == null || host == null)
                 throw new IllegalArgumentException(
@@ -34,8 +34,7 @@ public class DatabaseConnector {
 
             return conn;
         } catch (Exception e) {
-            throw new DatabaseConnectionException(e);
+            throw new DatabaseConnectionException();
         }
     }
 }
-

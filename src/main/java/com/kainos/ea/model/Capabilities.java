@@ -4,52 +4,52 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Capabilities {
-    private int capability_id;
-    private String name;
-    private String description;
+    private int CapabilityId;
+    private String Name;
+    private String Description;
 
-    private String role_title;
+    private String RoleTitle;
 
-    private int job_role_id;
+    private int JobRoleId;
 
-    public int getCapability_id() {
-        return capability_id;
+    public int getCapabilityId() {
+        return CapabilityId;
     }
 
-    public void setCapability_id(int capability_id) {
-        this.capability_id = capability_id;
+    public void setCapabilityId(int capabilityId) {
+        CapabilityId = capabilityId;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        Name = name;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        Description = description;
     }
 
-    public int getJob_role_id() {
-        return job_role_id;
+    public int getJobRoleId() {
+        return JobRoleId;
     }
 
-    public void setJob_role_id(int job_role_id) {
-        this.job_role_id = job_role_id;
+    public void setJobRoleId(int jobRoleId) {
+        JobRoleId = jobRoleId;
     }
 
-    public String getRole_title() {
-        return role_title;
+    public String getRoleTitle() {
+        return RoleTitle;
     }
 
-    public void setRole_title(String role_title) {
-        this.role_title = role_title;
+    public void setRoleTitle(String roleTitle) {
+        RoleTitle = roleTitle;
     }
 
     @JsonCreator
@@ -58,10 +58,10 @@ public class Capabilities {
                         @JsonProperty("Description") String Description,
                         @JsonProperty("RoleTitle") String RoleTitle)
     {
-        setCapability_id(CapabilityId);
+        setCapabilityId(CapabilityId);
         setName(Name);
         setDescription(Description);
-        setRole_title(RoleTitle);
+        setRoleTitle(RoleTitle);
 
     }
 }

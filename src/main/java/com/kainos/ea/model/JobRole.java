@@ -5,37 +5,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobRole
 {
-    private int roleID;
-
+    private int roleId;
     private String roleTitle;
-
     private String specLink;
-
-    private String specSummary;
-
     private String capabilityName;
 
     @JsonCreator
-    public JobRole(@JsonProperty("role_id") int roleID,
+    public JobRole(
+                   @JsonProperty("role_id") int roleId,
                    @JsonProperty("role_title") String roleTitle,
-                   @JsonProperty("name") String capabilityName,
-                   @JsonProperty("spec_link") String specLink,
-                   @JsonProperty("spec_summary") String specSummary)
+                   @JsonProperty("Capabilities.name") String capabilityName,
+                   @JsonProperty("spec_link") String specLink)
 
     {
-        setRoleID(roleID);
+        setRoleId(roleId);
         setRoleTitle(roleTitle);
-        setCapabilityName(capabilityName);
         setSpecLink(specLink);
-        setSpecSummary(specSummary);
+        setCapabilityName(capabilityName);
     }
 
-    public int getRoleID() {
-        return roleID;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
+    public void setRoleId(int roleID) {
+        this.roleId = roleID;
     }
 
     public String getRoleTitle() {
@@ -50,23 +44,11 @@ public class JobRole
         return specLink;
     }
 
-    public void setSpecLink(String specLink) {
-        this.specLink = specLink;
+    public void setSpecLink(String link) {
+        this.specLink = link;
     }
 
-    public String getSpecSummary() {
-        return specSummary;
-    }
+    public String getCapabilityName() {return capabilityName;}
 
-    public void setSpecSummary(String specSummary) {
-        this.specSummary = specSummary;
-    }
-
-    public String getCapabilityName() {
-        return capabilityName;
-    }
-
-    public void setCapabilityName(String capabilityName) {
-        this.capabilityName = capabilityName;
-    }
+    public void setCapabilityName(String capabilityName) {this.capabilityName = capabilityName; }
 }
