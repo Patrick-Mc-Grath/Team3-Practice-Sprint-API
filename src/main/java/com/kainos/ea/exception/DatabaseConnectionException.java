@@ -1,7 +1,7 @@
 package com.kainos.ea.exception;
 
 public class DatabaseConnectionException extends Throwable{
-    public DatabaseConnectionException(Exception error){
-        super(error);
+    public String getMessage(){
+        return "Failed to connect to database";
     }
 }
