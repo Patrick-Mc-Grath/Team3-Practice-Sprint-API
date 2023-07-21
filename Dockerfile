@@ -17,5 +17,7 @@ ENV DB_PASSWORD ${DB_PASSWORD}
 
 RUN mvn clean install -DskipTests=true
 EXPOSE 8080
+RUN mvn clean integration-test
+
 
 CMD ["java","-jar", "/code/target/JavaWebService-1.0-SNAPSHOT.jar", "server", "/code/config.yml"]
