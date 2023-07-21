@@ -15,7 +15,7 @@ public class CompetencyDao {
     public List<CompetencyRequest> getAllCompsAndBand(int bandId, Connection c) throws SQLException, DatabaseConnectionException {
             Statement st = c.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT Name, Description, band_name FROM Competencies JOIN Band_Competencies ON Competencies.CompetencyId = Band_Competencies.CompetencyId JOIN Bands ON Bands.band_id = Band_Competencies.BandId WHERE Band_Id = " + bandId);
+            ResultSet rs = st.executeQuery("SELECT name, description, band_name FROM Competencies JOIN Band_Competencies ON Competencies.competency_id = Band_Competencies.competency_id JOIN Bands ON Bands.band_id = Band_Competencies.band_id WHERE band_id = " + bandId);
 
             List<CompetencyRequest> competencyList = new ArrayList<>();
 
@@ -23,8 +23,7 @@ public class CompetencyDao {
                 CompetencyRequest competency = new CompetencyRequest(
                         rs.getString("Name"),
                         rs.getString("Description"),
-                        rs.getString("band_n" +
-                                "ame")
+                        rs.getString("band_name")
                 );
                 competencyList.add(competency);
             }
