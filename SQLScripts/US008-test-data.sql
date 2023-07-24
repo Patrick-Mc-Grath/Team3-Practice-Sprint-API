@@ -1,10 +1,6 @@
-INSERT INTO Training_Categories(name) VALUES ('Professional Skills');
-INSERT INTO Training_Categories(name) VALUES ('Technical Skills');
-INSERT INTO Training_Categories(name) VALUES ('Development Programmes');
-
-INSERT INTO Training(name, link, training_category_id) VALUES ('Test professional skills training', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Upcoming-Courses.aspx', 1);
-INSERT INTO Training(name, link, training_category_id) VALUES ('Test technical skills training', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Upcoming-Courses.aspx', 2);
-INSERT INTO Training(name, link, training_category_id) VALUES ('Test development programme', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Upcoming-Courses.aspx', 3);
+INSERT INTO Training(name, link) VALUES ('Test professional skills training', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Upcoming-Courses.aspx');
+INSERT INTO Training(name, link) VALUES ('Test technical skills training', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Upcoming-Courses.aspx');
+INSERT INTO Training(name, link) VALUES ('Test development programme', 'https://kainossoftwareltd.sharepoint.com/L%26D/SitePages/Upcoming-Courses.aspx');
 
 INSERT INTO Training_Bands(training_id, band_id) VALUES (1, 0);
 INSERT INTO Training_Bands(training_id, band_id) VALUES (1, 1);
