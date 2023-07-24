@@ -1,6 +1,7 @@
 package com.kainos.ea;
 
 import com.kainos.ea.controller.TrainingController;
+import com.kainos.ea.controller.JobRolesController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -32,6 +33,7 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     public void run(final WebServiceConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new TrainingController());
+        environment.jersey().register(new JobRolesController());
     }
 
 }
