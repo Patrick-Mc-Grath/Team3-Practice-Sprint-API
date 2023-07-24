@@ -10,18 +10,21 @@ public class JobRole
     private String specLink;
     private String capabilityName;
 
+
     @JsonCreator
     public JobRole(
                    @JsonProperty("role_id") int roleId,
                    @JsonProperty("role_title") String roleTitle,
                    @JsonProperty("Capabilities.name") String capabilityName,
                    @JsonProperty("spec_link") String specLink)
+                
 
     {
         setRoleId(roleId);
         setRoleTitle(roleTitle);
         setSpecLink(specLink);
         setCapabilityName(capabilityName);
+
     }
 
     public int getRoleId() {
