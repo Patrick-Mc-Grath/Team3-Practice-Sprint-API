@@ -35,7 +35,7 @@ public class DatabaseConnector {
 
             return conn;
         } catch (Exception e) {
-            throw new DatabaseConnectionException(e);
+            throw new DatabaseConnectionException();
         }
     }
 }
