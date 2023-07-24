@@ -5,10 +5,6 @@ CREATE TABLE Capabilities (
 	job_role_id smallint NOT NULL
 );
 
-ALTER TABLE Capabilities
-ADD CONSTRAINT FK_JobRoleId
-FOREIGN KEY (job_role_id) REFERENCES Job_Roles(role_id);
-
 CREATE TABLE Job_Families (
 	job_family_id smallint NOT NULL PRIMARY KEY,
 	capability_id smallint NOT NULL,
