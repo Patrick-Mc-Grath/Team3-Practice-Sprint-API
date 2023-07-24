@@ -1,5 +1,6 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CapabilityRequest;
 
 import java.sql.*;

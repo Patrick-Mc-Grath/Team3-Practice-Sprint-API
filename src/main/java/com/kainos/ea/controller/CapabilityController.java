@@ -1,10 +1,12 @@
 package com.kainos.ea.controller;
 
+import com.kainos.ea.dao.CapabilityDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.service.CapabilityService;
+import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.validator.CapabilityValidator;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
@@ -19,8 +21,19 @@ import javax.ws.rs.core.Response;
 @Path("/api")
 public class CapabilityController {
 
+    private CapabilityService capabilityService;
+
+    public CapabilityController() {
+        capabilityService = new CapabilityService(new CapabilityDao(), new DatabaseConnector());
+    }
+
+    public CapabilityController(CapabilityService capabilityService) {
+        this.capabilityService = capabilityService;
+    }
+
     CapabilityValidator capabilityValidator = new CapabilityValidator();
-    CapabilityService capabilityService = new CapabilityService();
+
+
 
     @POST
     @Path("/capabilities")

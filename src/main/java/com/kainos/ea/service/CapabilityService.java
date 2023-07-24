@@ -10,8 +10,13 @@ import java.sql.SQLException;
 
 public class CapabilityService {
 
-    public CapabilityDao capDao;
-    public DatabaseConnector databaseConnector;
+    public CapabilityDao capDao = new CapabilityDao();
+    public DatabaseConnector databaseConnector = new DatabaseConnector();
+
+    public CapabilityService(CapabilityDao capDao, DatabaseConnector databaseConnector) {
+        this.capDao = capDao;
+        this.databaseConnector = databaseConnector;
+    }
 
     public int insertCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException {
         return capDao.insertCapability(cap, databaseConnector.getConnection());
