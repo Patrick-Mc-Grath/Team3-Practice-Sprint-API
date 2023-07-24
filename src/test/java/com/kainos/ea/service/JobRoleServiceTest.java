@@ -1,7 +1,10 @@
 package com.kainos.ea.service;
 import com.kainos.ea.dao.JobRoleDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToCreateJobRoleException;
+import com.kainos.ea.exception.InvalidJobRoleException;
 import com.kainos.ea.model.JobRole;
+import com.kainos.ea.model.JobRoleRequest;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,6 +27,12 @@ class JobRoleServiceTest {
     JobRoleService jobRoleService = new JobRoleService(jobRoleDao,databaseConnector);
 
     Connection conn;
+
+    JobRoleRequest jobRoleRequest = new JobRoleRequest(
+            "Software Engineer",
+            1,
+            1
+    );
 
     @Test
     void getJobRole_Should_Return_Arraylist() throws DatabaseConnectionException, SQLException
@@ -51,5 +60,26 @@ class JobRoleServiceTest {
         assertThrows(DatabaseConnectionException.class,
                 () -> jobRoleService.getJobRoles());
     }
+
+    @Test
+    void createRole_shouldReturnAnID_whenDaoReturnsAnID() throws SQLException, DatabaseConnectionException, InvalidJobRoleException, FailedToCreateJobRoleException {
+        int expectedResult = 1;
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobRoleDao.createRole(jobRoleRequest, conn)).thenReturn(expectedResult);
+
+        int result = jobRoleService.createRole(jobRoleRequest);
+
+        assertEquals(result, expectedResult);
+    }
+
+    @Test
+    void insertEmployee_shouldThrowFailedToCreateJobRoleException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
+        Mockito.when(jobRoleDao.createRole(jobRoleRequest, conn)).thenThrow(SQLException.class);
+
+        assertThrows(FailedToCreateJobRoleException.class,
+                () -> jobRoleService.createRole(jobRoleRequest));
+    }
+
 
 }

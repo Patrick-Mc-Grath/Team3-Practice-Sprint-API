@@ -2,8 +2,12 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.JobRoleDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToCreateJobRoleException;
+import com.kainos.ea.exception.InvalidJobRoleException;
 import com.kainos.ea.model.JobRole;
+import com.kainos.ea.model.JobRoleRequest;
 import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.validator.JobRoleValidator;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -13,6 +17,7 @@ public class JobRoleService
     public JobRoleDao jobRoleDao;
 
     public DatabaseConnector databaseConnector;
+    public JobRoleValidator jobRoleValidator = new JobRoleValidator();
 
     public JobRoleService(JobRoleDao jobRoleDao, DatabaseConnector databaseConnector) {
         this.jobRoleDao = jobRoleDao;
@@ -21,5 +26,24 @@ public class JobRoleService
 
     public List<JobRole> getJobRoles() throws DatabaseConnectionException, SQLException {
         return jobRoleDao.getRoles(databaseConnector.getConnection());
+    }
+
+    public int createRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException, DatabaseConnectionException {
+        try {
+            String validation = jobRoleValidator.isValidJobRole(jobRoleRequest);
+            if(validation != null){
+                throw new InvalidJobRoleException(validation);
+            }
+            int id = jobRoleDao.createRole(jobRoleRequest, databaseConnector.getConnection());
+
+            if(id == -1){
+                throw new FailedToCreateJobRoleException();
+            }
+
+            return id;
+        } catch(SQLException e) {
+            System.err.println(e.getMessage());
+            throw new FailedToCreateJobRoleException();
+        }
     }
 }
