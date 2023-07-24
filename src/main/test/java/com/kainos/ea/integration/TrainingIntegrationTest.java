@@ -37,4 +37,11 @@ public class TrainingIntegrationTest {
 
         Assertions.assertEquals(400, response.getStatus());
     }
+
+    @Test
+    void getTrainingCategories_shouldReturnListOfCategories() {
+        List<String> response = APP.client().target("http://localhost:8080/api/training-categories").request().get(List.class);
+
+        Assertions.assertTrue(response.size() > 0);
+    }
 }
