@@ -8,10 +8,6 @@ public class Capabilities {
     private String Name;
     private String Description;
 
-    private String RoleTitle;
-
-    private int JobRoleId;
-
     public int getCapabilityId() {
         return CapabilityId;
     }
@@ -36,32 +32,14 @@ public class Capabilities {
         Description = description;
     }
 
-    public int getJobRoleId() {
-        return JobRoleId;
-    }
-
-    public void setJobRoleId(int jobRoleId) {
-        JobRoleId = jobRoleId;
-    }
-
-    public String getRoleTitle() {
-        return RoleTitle;
-    }
-
-    public void setRoleTitle(String roleTitle) {
-        RoleTitle = roleTitle;
-    }
-
     @JsonCreator
-    public Capabilities(@JsonProperty("CapabilityId") int CapabilityId,
-                        @JsonProperty("Name") String Name,
-                        @JsonProperty("Description") String Description,
-                        @JsonProperty("RoleTitle") String RoleTitle)
+    public Capabilities(@JsonProperty("capability_id") int capabilityId,
+                        @JsonProperty("name") String name,
+                        @JsonProperty("description") String description)
     {
-        setCapabilityId(CapabilityId);
-        setName(Name);
-        setDescription(Description);
-        setRoleTitle(RoleTitle);
+        setCapabilityId(capabilityId);
+        setName(name);
+        setDescription(description);
 
     }
 }
