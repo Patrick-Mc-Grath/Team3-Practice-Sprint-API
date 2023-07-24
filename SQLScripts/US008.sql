@@ -1,5 +1,3 @@
-USE Team3_Test_IeuanB;
-
 CREATE TABLE IF NOT EXISTS Training_Categories (
 	training_category_id SMALLINT AUTO_INCREMENT NOT NULL,
     name VARCHAR(100) NOT NULL,

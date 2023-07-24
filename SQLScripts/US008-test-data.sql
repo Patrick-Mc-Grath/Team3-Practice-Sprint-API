@@ -1,5 +1,3 @@
-USE Team3_Test_IeuanB;
-
 INSERT INTO Training_Categories(name) VALUES ('Professional Skills');
 INSERT INTO Training_Categories(name) VALUES ('Technical Skills');
 INSERT INTO Training_Categories(name) VALUES ('Development Programmes');
