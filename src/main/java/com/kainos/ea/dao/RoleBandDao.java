@@ -13,11 +13,8 @@ import java.sql.Connection;
 
 public class RoleBandDao {
 
-    DatabaseConnector databaseConnector = new DatabaseConnector();
-
-    public List<RoleBandResponse> getRoleBands() throws SQLException, DatabaseConnectionException {
-        try (Connection conn = databaseConnector.getConnection()) {
-            Statement st = conn.createStatement();
+    public List<RoleBandResponse> getRoleBands(Connection c) throws SQLException {
+            Statement st = c.createStatement();
 
             ResultSet rs = st.executeQuery(
                     "SELECT Role_Bands.role_id, Role_Bands.band_id, role_title, band_name FROM Role_Bands INNER JOIN Job_Roles ON Role_Bands.role_id = Job_Roles.role_id INNER JOIN Bands ON Role_Bands.band_id = Bands.band_id;");
@@ -35,6 +32,5 @@ public class RoleBandDao {
                 roleBands.add(roleBandResponse);
             }
             return roleBands;
-        }
     }
 }

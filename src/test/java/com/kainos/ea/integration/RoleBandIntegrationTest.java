@@ -1,7 +1,10 @@
 package com.kainos.ea.integration;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
+import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.RoleBandResponse;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -11,6 +14,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import javax.ws.rs.client.Invocation;
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
@@ -22,10 +26,16 @@ public class RoleBandIntegrationTest {
 
     @Test
     void getRoleBands_shouldReturnListOfRoleBandResponses() {
-        List<RoleBandResponse> response = APP.client().target("http://localhost:8080/api/role-band-levels")
-                .request()
-                .get(List.class);
+        ObjectMapper mapper = new ObjectMapper();
+        Invocation.Builder response = APP.client().target("http://localhost:8080/api/role-band-levels")
+                .request();
 
-        Assertions.assertTrue(response.size() > 0);
+        List<RoleBandResponse> roleBands = response.get(List.class);
+        List<RoleBandResponse> pojos = mapper.convertValue(roleBands, new TypeReference<List<RoleBandResponse>>() { });
+
+        Assertions.assertTrue(roleBands.size() > 0);
+        Assertions.assertEquals(1, pojos.get(0).getRoleID());
+        Assertions.assertEquals(1, pojos.get(0).getBandID());
+        Assertions.assertEquals(200, response.get().getStatus());
     }
 }

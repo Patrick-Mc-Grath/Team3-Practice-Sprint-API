@@ -18,10 +18,11 @@ public class RoleBandService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<RoleBandResponse> getRoleBands() throws DatabaseConnectionException, FailedToGetRoleBandsException {
+    public List<RoleBandResponse> getRoleBands() throws FailedToGetRoleBandsException {
         try{
-            return roleBandDao.getRoleBands();
-        } catch(SQLException e) {
+            return roleBandDao.getRoleBands(databaseConnector.getConnection());
+        } catch(SQLException | DatabaseConnectionException e) {
+            System.err.println(e);
             throw new FailedToGetRoleBandsException();
         }
     }

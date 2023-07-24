@@ -36,7 +36,7 @@ public class RoleBandControllerTest {
     }
 
     @Test
-    public void getRoleBands_shouldReturnServerError_whenServiceThrowsFailedToGetRoleBandsException_orDatabaseConnectionException() throws DatabaseConnectionException, FailedToGetRoleBandsException {
+    public void getRoleBands_shouldReturnServerError_whenServiceThrowsFailedToGetRoleBandsException_orDatabaseConnectionException() throws FailedToGetRoleBandsException {
         int expectedResult = 500;
         Mockito.when(roleBandService.getRoleBands()).thenThrow(FailedToGetRoleBandsException.class);
 

@@ -42,7 +42,7 @@ public class RoleBandController{
         try {
             List<RoleBandResponse> roleBandList = roleBandService.getRoleBands();
             return Response.ok().entity(roleBandList).build();
-        } catch (DatabaseConnectionException | FailedToGetRoleBandsException e) {
+        } catch (FailedToGetRoleBandsException e) {
             return Response.serverError().build();
         }
     }

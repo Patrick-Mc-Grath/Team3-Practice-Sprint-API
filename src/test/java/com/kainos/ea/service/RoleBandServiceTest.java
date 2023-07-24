@@ -31,7 +31,7 @@ public class RoleBandServiceTest {
     void getRoleBands_shouldReturnRoleBandResponseList_whenDaoReturnsRoleBandResponseList() throws DatabaseConnectionException, SQLException, FailedToGetRoleBandsException {
         List<RoleBandResponse> expectedResult = new ArrayList<>();
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(roleBandDao.getRoleBands()).thenReturn(expectedResult);
+        Mockito.when(roleBandDao.getRoleBands(conn)).thenReturn(expectedResult);
 
         List<RoleBandResponse> result = roleBandService.getRoleBands();
 
@@ -41,7 +41,15 @@ public class RoleBandServiceTest {
     @Test
     public void getRoleBands_shouldThrowFailedToGetRoleBandsException_whenDaoThrowsSQLException() throws SQLException, DatabaseConnectionException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(roleBandDao.getRoleBands()).thenThrow(SQLException.class);
+        Mockito.when(roleBandDao.getRoleBands(conn)).thenThrow(SQLException.class);
+
+        assertThrows(FailedToGetRoleBandsException.class,
+                () -> roleBandService.getRoleBands());
+    }
+
+    @Test
+    public void getRoleBands_shouldThrowFailedToGetRoleBandsException_whenDaoThrowsDatabaseConnectionException() throws SQLException, DatabaseConnectionException {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
 
         assertThrows(FailedToGetRoleBandsException.class,
                 () -> roleBandService.getRoleBands());

@@ -1,9 +1,12 @@
 package com.kainos.ea.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RoleBandResponse {
     private int roleID;
     private int bandID;
-    private String roleName;
+    private String roleTitle;
     private String bandName;
 
     public int getRoleID() {
@@ -14,8 +17,8 @@ public class RoleBandResponse {
         return bandID;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRoleTitle() {
+        return roleTitle;
     }
 
     public String getBandName() {
@@ -30,18 +33,24 @@ public class RoleBandResponse {
         this.bandID = bandID;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRoleTitle(String roleTitle) {
+        this.roleTitle = roleTitle;
     }
 
     public void setBandName(String bandName) {
         this.bandName = bandName;
     }
 
-    public RoleBandResponse(int roleID, int bandID, String roleName, String bandName) {
+
+    @JsonCreator
+    public RoleBandResponse(
+            @JsonProperty("role_id") int roleID,
+            @JsonProperty("band_id") int bandID,
+            @JsonProperty("role_title") String roleTitle,
+            @JsonProperty("band_name") String bandName) {
         setRoleID(roleID);
         setBandID(bandID);
-        setRoleName(roleName);
+        setRoleTitle(roleTitle);
         setBandName(bandName);
     }
 }
