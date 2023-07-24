@@ -1,8 +1,8 @@
 package com.kainos.ea.service;
 
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CompetencyRequest;
-import com.kainos.ea.execption.DatabaseConnectionException;
-import com.kainos.ea.execption.FailedToGetCompsException;
+import com.kainos.ea.exception.FailedToGetCompsException;
 import com.kainos.ea.dao.CompetencyDao;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
@@ -40,15 +40,6 @@ public class CompetencyServiceTest {
     void getCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsSQLException() throws SQLException, DatabaseConnectionException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
         Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenThrow(SQLException.class);
-
-        assertThrows(FailedToGetCompsException.class,
-                () -> compService.getAllCompsWithBand(bandId));
-    }
-
-    @Test
-    void getAllCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsDatabaseConnectionException() throws SQLException, DatabaseConnectionException {
-        Mockito.when(dbConnector.getConnection()).thenReturn(connection);
-        Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenThrow(DatabaseConnectionException.class);
 
         assertThrows(FailedToGetCompsException.class,
                 () -> compService.getAllCompsWithBand(bandId));

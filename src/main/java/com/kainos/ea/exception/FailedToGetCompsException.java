@@ -1,4 +1,4 @@
-package com.kainos.ea.execption;
+package com.kainos.ea.exception;
 
 public class FailedToGetCompsException extends Throwable {
 

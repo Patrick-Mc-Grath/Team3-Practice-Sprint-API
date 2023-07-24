@@ -1,4 +1,4 @@
-package com.kainos.ea.execption;
+package com.kainos.ea.exception;
 
 public class DatabaseConnectionException extends Throwable {
     @Override

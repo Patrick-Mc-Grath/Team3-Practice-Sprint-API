@@ -3,7 +3,7 @@ package com.kainos.ea.controller;
 import com.kainos.ea.dao.CompetencyDao;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.service.CompetencyService;
-import com.kainos.ea.execption.FailedToGetCompsException;
+import com.kainos.ea.exception.FailedToGetCompsException;
 import io.swagger.annotations.Api;
 
 import javax.ws.rs.GET;

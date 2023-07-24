@@ -2,10 +2,7 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.execption.DatabaseConnectionException;
-import com.kainos.ea.execption.FailedToGetCompsException;
-import com.kainos.ea.dao.CompetencyDao;
-import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.exception.FailedToGetCompsException;
 import com.kainos.ea.service.CompetencyService;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -16,9 +13,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import javax.ws.rs.core.Response;
 import java.sql.Connection;
-import java.sql.SQLException;
 
-    @ExtendWith(DropwizardExtensionsSupport.class)
+@ExtendWith(DropwizardExtensionsSupport.class)
     public class CompetencyControllerTests
     {
 

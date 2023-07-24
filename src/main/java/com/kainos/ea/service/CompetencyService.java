@@ -1,8 +1,8 @@
 package com.kainos.ea.service;
-import com.kainos.ea.execption.DatabaseConnectionException;
 import com.kainos.ea.dao.CompetencyDao;
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CompetencyRequest;
-import com.kainos.ea.execption.FailedToGetCompsException;
+import com.kainos.ea.exception.FailedToGetCompsException;
 import com.kainos.ea.util.DatabaseConnector;
 
 

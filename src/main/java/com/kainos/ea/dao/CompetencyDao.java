@@ -1,8 +1,6 @@
 package com.kainos.ea.dao;
 
 import com.kainos.ea.model.CompetencyRequest;
-import com.kainos.ea.execption.DatabaseConnectionException;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class CompetencyDao {
 
-    public List<CompetencyRequest> getAllCompsAndBand(int bandId, Connection c) throws SQLException, DatabaseConnectionException {
+    public List<CompetencyRequest> getAllCompsAndBand(int bandId, Connection c) throws SQLException {
             Statement st = c.createStatement();
 
             ResultSet rs = st.executeQuery("SELECT name, description, band_name FROM Competencies JOIN Band_Competencies ON Competencies.competency_id = Band_Competencies.competency_id JOIN Bands ON Bands.band_id = Band_Competencies.band_id WHERE Band_Competencies.band_id = " + bandId);
