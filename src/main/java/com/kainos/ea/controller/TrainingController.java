@@ -45,4 +45,16 @@ public class TrainingController {
         }
     }
 
+    @GET
+    @Path("/training-categories")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTrainingCategories(){
+        try {
+            return Response.status(HttpStatus.OK_200).entity(trainingService.getTrainingCategories()).build();
+        } catch (SQLException | DatabaseConnectionException e){
+            System.err.println(e.getMessage());
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        }
+    }
+
 }
