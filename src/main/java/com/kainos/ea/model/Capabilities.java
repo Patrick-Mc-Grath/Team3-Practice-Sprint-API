@@ -13,7 +13,7 @@ public class Capabilities {
     }
 
     public void setCapabilityId(int capabilityId) {
-        capabilityId = capabilityId;
+        this.capabilityId = capabilityId;
     }
 
     public String getName() {
@@ -21,7 +21,7 @@ public class Capabilities {
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 
     public String getDescription() {
@@ -29,7 +29,7 @@ public class Capabilities {
     }
 
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
 
     @JsonCreator
