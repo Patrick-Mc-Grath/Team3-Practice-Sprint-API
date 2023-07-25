@@ -19,8 +19,8 @@ public class CompetencyDao {
 
             while (rs.next()) {
                 CompetencyRequest competency = new CompetencyRequest(
-                        rs.getString("Name"),
-                        rs.getString("Description"),
+                        rs.getString("name"),
+                        rs.getString("description"),
                         rs.getString("band_name")
                 );
                 competencyList.add(competency);
