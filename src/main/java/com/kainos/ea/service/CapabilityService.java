@@ -12,8 +12,8 @@ import java.sql.SQLException;
 
 public class CapabilityService {
 
-    public CapabilityDao capDao = new CapabilityDao();
-    public DatabaseConnector databaseConnector = new DatabaseConnector();
+    private CapabilityDao capDao = new CapabilityDao();
+    private DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public CapabilityService(CapabilityDao capDao, DatabaseConnector databaseConnector) {
         this.capDao = capDao;

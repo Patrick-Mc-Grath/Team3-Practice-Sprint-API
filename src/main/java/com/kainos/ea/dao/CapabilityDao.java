@@ -1,16 +1,14 @@
 package com.kainos.ea.dao;
 
-import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CapabilityRequest;
-
 import java.sql.*;
 
 public class CapabilityDao {
 
     public int insertCapability(CapabilityRequest cap, Connection c) throws SQLException {
-        String insertEmployeeQuery = "INSERT INTO Capabilities (name, description) values (?, ?)";
+        String insertCapabilityQuery = "INSERT INTO Capabilities (name, description) values (?, ?)";
 
-        PreparedStatement preparedStmt = c.prepareStatement(insertEmployeeQuery, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement preparedStmt = c.prepareStatement(insertCapabilityQuery, Statement.RETURN_GENERATED_KEYS);
         preparedStmt.setString(1, cap.getName());
         preparedStmt.setString(2, cap.getDescription());
 
@@ -19,7 +17,6 @@ public class CapabilityDao {
         if (affectedRows == 0) {
             throw new SQLException("Creating capability failed, no rows affected.");
         }
-
         int capNo = 0;
 
         try (ResultSet rs = preparedStmt.getGeneratedKeys()) {
@@ -27,9 +24,6 @@ public class CapabilityDao {
                 capNo = rs.getInt(1);
             }
         }
-
         return capNo;
     }
-
-
 }

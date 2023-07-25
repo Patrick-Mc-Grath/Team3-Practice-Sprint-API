@@ -34,8 +34,6 @@ public class CapabilityController {
 
     CapabilityValidator capabilityValidator = new CapabilityValidator();
 
-
-
     @POST
     @Path("/capabilities")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,5 +55,4 @@ public class CapabilityController {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
-
 }
