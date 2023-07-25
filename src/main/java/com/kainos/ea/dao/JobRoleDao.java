@@ -15,7 +15,7 @@ public class JobRoleDao
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery(
-                "SELECT role_id, role_title, spec_link"
+                "SELECT role_id, role_title, job_family_id"
                         + " FROM Job_Roles;");
 
         List<JobRole> jobRoles = new ArrayList<>();
@@ -24,7 +24,7 @@ public class JobRoleDao
             JobRole jobRole = new JobRole(
                     rs.getInt("role_id"),
                     rs.getString("role_title"),
-                    rs.getString("spec_link")
+                    rs.getInt("job_family_id")
             );
 
             jobRoles.add(jobRole);
