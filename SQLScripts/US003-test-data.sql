@@ -5,9 +5,9 @@ INSERT INTO Capabilities (name, description, job_role_id) VALUES ("Business Deve
 INSERT INTO Capabilities (name, description, job_role_id) VALUES ("Engineering", "Test", 2);
 
 UPDATE Job_Roles
-SET job_family_id = 2
+SET capability_id = 2
 WHERE role_id = 1;
 
 UPDATE Job_Roles
-SET job_family_id = 1
+SET capability_id = 1
 WHERE role_id = 2;

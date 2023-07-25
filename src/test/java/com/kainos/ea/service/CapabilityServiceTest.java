@@ -45,4 +45,11 @@ class CapabilityServiceTest {
                 () -> capabilitiesService.getCapabilities());
     }
 
+    @Test
+    void checkDatabaseConnectionException() throws DatabaseConnectionException, SQLException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+        assertThrows(DatabaseConnectionException.class,
+                () -> capabilitiesService.getCapabilities());
+    }
 }

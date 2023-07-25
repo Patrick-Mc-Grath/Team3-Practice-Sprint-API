@@ -15,7 +15,7 @@ public class CapabilitiesDao {
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery(
-                "SELECT *"
+                "SELECT capability_id, name, description"
                         + "FROM Capabilities;");
 
         List<Capabilities> capabilitiesList = new ArrayList<>();

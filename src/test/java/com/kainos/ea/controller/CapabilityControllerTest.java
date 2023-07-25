@@ -20,19 +20,16 @@ class CapabilityControllerTest {
 
     CapabilitiesService capabilitiesService = Mockito.mock(CapabilitiesService.class);
 
-    CapabilitiesController capabilitiesController = new CapabilitiesController(capabilitiesService);
+    CapabilityController capabilityController = new CapabilityController(capabilitiesService);
 
-    static final DropwizardAppExtension<WebServiceConfiguration> APP = new DropwizardAppExtension<>(
-            WebServiceApplication.class, null,
-            new ResourceConfigurationSourceProvider()
-    );
+
 
     @Test
     void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException
     {
         Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new SQLException());
 
-        Response response = capabilitiesController.getCapabilities();
+        Response response = capabilityController.getCapabilities();
         Assertions.assertEquals(500,response.getStatus());
     }
 
@@ -40,7 +37,7 @@ class CapabilityControllerTest {
     void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException
     {
         Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new DatabaseConnectionException());
-        Response response = capabilitiesController.getCapabilities();
+        Response response = capabilityController.getCapabilities();
         Assertions.assertEquals(500,response.getStatus());
     }
 }

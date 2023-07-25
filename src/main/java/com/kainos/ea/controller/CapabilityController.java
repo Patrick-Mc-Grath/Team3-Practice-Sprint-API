@@ -16,16 +16,16 @@ import java.sql.SQLException;
 @Api("API Hack Street Boys")
 @Path("/api")
 
-public class CapabilitiesController {
+public class CapabilityController {
 
-    private static CapabilitiesService capabilitiesService;
+    private CapabilitiesService capabilitiesService;
 
-    public CapabilitiesController()
+    public CapabilityController()
     {
         capabilitiesService = new CapabilitiesService(new CapabilitiesDao(), new DatabaseConnector());
     }
 
-    public CapabilitiesController(CapabilitiesService capabilitiesService) {this.capabilitiesService = capabilitiesService;}
+    public CapabilityController(CapabilitiesService capabilitiesService) {this.capabilitiesService = capabilitiesService;}
 
     @GET
     @Path("/capabilities")
