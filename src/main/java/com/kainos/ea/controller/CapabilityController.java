@@ -16,6 +16,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Api("Backend API Capabilities")
 @Path("/api")
@@ -39,13 +40,13 @@ public class CapabilityController {
     @Path("/capabilities")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCapability(CapabilityRequest cap) throws DatabaseConnectionException {
+    public Response createCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
         try {
             if (capabilityValidator.isValidCapability(cap)) {
                 try {
                     int id = capabilityService.insertCapability(cap);
                     return Response.status(HttpStatus.CREATED_201).entity(id).build();
-                } catch (Exception e) {
+                } catch (DatabaseConnectionException | SQLException e) {
                     System.out.println(e);
                     return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
                 }

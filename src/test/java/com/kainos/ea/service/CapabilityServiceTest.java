@@ -2,6 +2,8 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.CapabilityDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.DescriptionLengthException;
+import com.kainos.ea.exception.NameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
@@ -28,7 +30,7 @@ public class CapabilityServiceTest {
     );
 
     @Test
-    void insertCapability_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException {
+    void insertCapability_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
         int expectedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(capDao.insertCapability(capRequest, conn)).thenReturn(expectedResult);
