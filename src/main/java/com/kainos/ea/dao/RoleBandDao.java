@@ -17,7 +17,10 @@ public class RoleBandDao {
             Statement st = c.createStatement();
 
             ResultSet rs = st.executeQuery(
-                    "SELECT Role_Bands.role_id, Role_Bands.band_id, role_title, band_name FROM Role_Bands INNER JOIN Job_Roles ON Role_Bands.role_id = Job_Roles.role_id INNER JOIN Bands ON Role_Bands.band_id = Bands.band_id;");
+                    "SELECT Role_Bands.role_id, Role_Bands.band_id, role_title, band_name " +
+                            "FROM Role_Bands " +
+                            "INNER JOIN Job_Roles ON Role_Bands.role_id = Job_Roles.role_id " +
+                            "INNER JOIN Bands ON Role_Bands.band_id = Bands.band_id;");
 
             List<RoleBandResponse> roleBands = new ArrayList<>();
 

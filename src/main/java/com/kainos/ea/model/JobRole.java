@@ -7,17 +7,14 @@ public class JobRole
 {
     private int roleId;
     private String roleTitle;
-    private String specLink;
 
     @JsonCreator
     public JobRole(
                    @JsonProperty("role_id") int roleId,
-                   @JsonProperty("role_title") String roleTitle,
-                   @JsonProperty("spec_link") String specLink)
+                   @JsonProperty("role_title") String roleTitle)
     {
         setRoleId(roleId);
         setRoleTitle(roleTitle);
-        setSpecLink(specLink);
     }
 
     public int getRoleId() {
@@ -34,13 +31,5 @@ public class JobRole
 
     public void setRoleTitle(String roleTitle) {
         this.roleTitle = roleTitle;
-    }
-
-    public String getSpecLink() {
-        return specLink;
-    }
-
-    public void setSpecLink(String link) {
-        this.specLink = link;
     }
 }
