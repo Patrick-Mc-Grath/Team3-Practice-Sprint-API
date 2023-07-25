@@ -1,5 +1,3 @@
-USE Team3_Test_IeuanB;
-
 	CREATE TABLE IF NOT EXISTS Competencies (
 competency_id TINYINT AUTO_INCREMENT,
 name varchar(50),

@@ -1,5 +1,3 @@
-USE Team3_Test_IeuanB;
-
 	INSERT INTO Bands(band_name)
     VALUES ("Trainee");
     
