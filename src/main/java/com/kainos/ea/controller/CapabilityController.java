@@ -12,10 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-
 @Api("API Hack Street Boys")
 @Path("/api")
-
 public class CapabilityController {
 
     private CapabilitiesService capabilitiesService;
@@ -35,8 +33,11 @@ public class CapabilityController {
         try
         {
             return Response.ok(capabilitiesService.getCapabilities()).build();
-        } catch (SQLException | DatabaseConnectionException e)
+        } catch (SQLException e)
         {
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        } catch (DatabaseConnectionException e) {
+
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }

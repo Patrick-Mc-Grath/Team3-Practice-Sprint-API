@@ -22,8 +22,6 @@ class CapabilityControllerTest {
 
     CapabilityController capabilityController = new CapabilityController(capabilitiesService);
 
-
-
     @Test
     void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException
     {

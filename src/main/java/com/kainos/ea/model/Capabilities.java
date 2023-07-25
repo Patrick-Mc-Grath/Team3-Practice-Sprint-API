@@ -4,32 +4,32 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Capabilities {
-    private int CapabilityId;
-    private String Name;
-    private String Description;
+    private int capabilityId;
+    private String name;
+    private String description;
 
     public int getCapabilityId() {
-        return CapabilityId;
+        return capabilityId;
     }
 
     public void setCapabilityId(int capabilityId) {
-        CapabilityId = capabilityId;
+        capabilityId = capabilityId;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        description = description;
     }
 
     @JsonCreator

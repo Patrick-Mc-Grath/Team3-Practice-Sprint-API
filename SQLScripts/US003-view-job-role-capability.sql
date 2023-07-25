@@ -6,8 +6,6 @@ CREATE TABLE Capabilities (
 );
 
 ALTER TABLE Job_Roles
-ADD COLUMN capability_id  smallint;
-
-ALTER TABLE Job_Roles
+ADD COLUMN capability_id  smallint
 ADD CONSTRAINT FK1_capability_id
 FOREIGN KEY (capability_id) REFERENCES Capabilities(capability_id);
