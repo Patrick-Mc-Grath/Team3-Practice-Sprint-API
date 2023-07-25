@@ -24,7 +24,7 @@ public class JobFamilyIntegrationTest {
     );
 
     @Test
-    void getCapabilities_shouldReturnListOfCapabilities() {
+    void getJobFamily_shouldReturnListOfCapabilities() {
         ObjectMapper mapper = new ObjectMapper();
         Invocation.Builder response = APP.client().target("http://localhost:8080/api/job-family")
                 .request();

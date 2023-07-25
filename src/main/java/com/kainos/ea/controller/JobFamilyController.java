@@ -2,6 +2,7 @@ package com.kainos.ea.controller;
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.dao.JobFamilyDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetJobFamilyException;
 import com.kainos.ea.service.CapabilitiesService;
 import com.kainos.ea.service.JobFamilyService;
 import com.kainos.ea.util.DatabaseConnector;
@@ -37,7 +38,7 @@ public class JobFamilyController {
         try
         {
             return Response.ok(jobFamilyService.getJobFamilies()).build();
-        } catch (SQLException | DatabaseConnectionException e)
+        } catch (FailedToGetJobFamilyException e)
         {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }

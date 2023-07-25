@@ -3,6 +3,7 @@ package com.kainos.ea.service;
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.dao.JobFamilyDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetJobFamilyException;
 import com.kainos.ea.model.Capabilities;
 import com.kainos.ea.model.JobFamily;
 import com.kainos.ea.util.DatabaseConnector;
@@ -29,8 +30,7 @@ class JobFamilyServiceTest {
     Connection conn;
 
     @Test
-    void getCapabilities_Should_Return_Arraylist() throws DatabaseConnectionException, SQLException
-    {
+    void getJobFamily_Should_Return_Arraylist() throws FailedToGetJobFamilyException, DatabaseConnectionException, SQLException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         ArrayList<JobFamily> jobFamilyList = new ArrayList<>();
         Mockito.when(jobFamilyDao.getJobFamilies(conn)).thenReturn(jobFamilyList);
@@ -39,12 +39,19 @@ class JobFamilyServiceTest {
     }
 
     @Test
-    void getCapabilities_checkSQLException() throws DatabaseConnectionException, SQLException
+    void getJobFamily_checkSQLException() throws DatabaseConnectionException, SQLException
     {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(capabilitiesDao.getCapabilities(conn)).thenThrow(SQLException.class);
-        assertThrows(SQLException.class,
-                () -> capabilitiesService.getCapabilities());
+        Mockito.when(jobFamilyDao.getJobFamilies(conn)).thenThrow(SQLException.class);
+        assertThrows(FailedToGetJobFamilyException.class,
+                () -> jobFamilyService.getJobFamilies());
     }
 
+    @Test
+    void getJobFamily_checkDatabaseConnectionException() throws DatabaseConnectionException, SQLException
+    {
+        Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
+        assertThrows(FailedToGetJobFamilyException.class,
+                () -> jobFamilyService.getJobFamilies());
+    }
 }

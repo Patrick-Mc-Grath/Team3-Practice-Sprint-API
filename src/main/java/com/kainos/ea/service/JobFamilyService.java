@@ -3,6 +3,7 @@ package com.kainos.ea.service;
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.dao.JobFamilyDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetJobFamilyException;
 import com.kainos.ea.model.Capabilities;
 import com.kainos.ea.model.JobFamily;
 import com.kainos.ea.util.DatabaseConnector;
@@ -21,8 +22,12 @@ public class JobFamilyService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<JobFamily> getJobFamilies() throws DatabaseConnectionException, SQLException {
-        return jobFamilyDao.getJobFamilies(databaseConnector.getConnection());
+    public List<JobFamily> getJobFamilies() throws FailedToGetJobFamilyException {
+        try {
+            return jobFamilyDao.getJobFamilies(databaseConnector.getConnection());
+        } catch (SQLException | DatabaseConnectionException e) {
+            throw new FailedToGetJobFamilyException();
+        }
     }
 
 }
