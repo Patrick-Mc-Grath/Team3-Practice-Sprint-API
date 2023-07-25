@@ -30,7 +30,7 @@ public class RoleBandIntegrationTest {
         Invocation.Builder response = APP.client().target("http://localhost:8080/api/role-band-levels")
                 .request();
 
-        List roleBands = response.get(List.class);
+        List<RoleBandResponse> roleBands = response.get(List.class);
         List<RoleBandResponse> pojos = mapper.convertValue(roleBands, new TypeReference<List<RoleBandResponse>>() { });
 
         Assertions.assertTrue(roleBands.size() > 0);
