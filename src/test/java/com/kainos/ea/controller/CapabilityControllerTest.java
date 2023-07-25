@@ -3,6 +3,7 @@ package com.kainos.ea.controller;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetCapabilityException;
 import com.kainos.ea.service.CapabilitiesService;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -23,18 +24,10 @@ class CapabilityControllerTest {
     CapabilityController capabilityController = new CapabilityController(capabilitiesService);
 
     @Test
-    void check_for_SQL_Exception() throws SQLException, DatabaseConnectionException
+    void check_for_SQL_Exception() throws FailedToGetCapabilityException
     {
-        Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new SQLException());
+        Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new FailedToGetCapabilityException());
 
-        Response response = capabilityController.getCapabilities();
-        Assertions.assertEquals(500,response.getStatus());
-    }
-
-    @Test
-    void check_for_Database_Connection_Exception() throws SQLException, DatabaseConnectionException
-    {
-        Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new DatabaseConnectionException());
         Response response = capabilityController.getCapabilities();
         Assertions.assertEquals(500,response.getStatus());
     }

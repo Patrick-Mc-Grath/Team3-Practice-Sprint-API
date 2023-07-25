@@ -5,7 +5,16 @@ CREATE TABLE Capabilities (
 
 );
 
+CREATE TABLE Job_Families (
+	job_family_id smallint NOT NULL PRIMARY KEY,
+	capability_id smallint NOT NULL,
+	name varchar(50) NOT NULL
+
+	CONSTRAINT Fk1_capability_id
+    FOREIGN KEY (capability_id) references Capabilities(capability_id);
+);
+
 ALTER TABLE Job_Roles
-ADD COLUMN capability_id  smallint
-ADD CONSTRAINT FK1_capability_id
-FOREIGN KEY (capability_id) REFERENCES Capabilities(capability_id);
+ADD COLUMN job_family_id  smallint
+ADD CONSTRAINT FK1_job_family_id
+FOREIGN KEY (job_family_id) REFERENCES Job_Families(job_family_id);

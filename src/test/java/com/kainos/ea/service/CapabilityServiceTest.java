@@ -2,6 +2,7 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetCapabilityException;
 import com.kainos.ea.model.Capabilities;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
@@ -27,8 +28,7 @@ class CapabilityServiceTest {
     Connection conn;
 
     @Test
-    void getCapabilities_Should_Return_Arraylist() throws DatabaseConnectionException, SQLException
-    {
+    void getCapabilities_Should_Return_Arraylist() throws DatabaseConnectionException, SQLException, FailedToGetCapabilityException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         ArrayList<Capabilities> empList = new ArrayList<>();
         Mockito.when(capabilitiesDao.getCapabilities(conn)).thenReturn(empList);
@@ -41,7 +41,7 @@ class CapabilityServiceTest {
     {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(capabilitiesDao.getCapabilities(conn)).thenThrow(SQLException.class);
-        assertThrows(SQLException.class,
+        assertThrows(FailedToGetCapabilityException.class,
                 () -> capabilitiesService.getCapabilities());
     }
 
@@ -49,7 +49,7 @@ class CapabilityServiceTest {
     void checkDatabaseConnectionException() throws DatabaseConnectionException, SQLException
     {
         Mockito.when(databaseConnector.getConnection()).thenThrow(DatabaseConnectionException.class);
-        assertThrows(DatabaseConnectionException.class,
+        assertThrows(FailedToGetCapabilityException.class,
                 () -> capabilitiesService.getCapabilities());
     }
 }

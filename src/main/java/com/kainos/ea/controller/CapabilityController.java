@@ -1,6 +1,7 @@
 package com.kainos.ea.controller;
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetCapabilityException;
 import com.kainos.ea.service.CapabilitiesService;
 import com.kainos.ea.util.DatabaseConnector;
 import io.swagger.annotations.Api;
@@ -33,11 +34,8 @@ public class CapabilityController {
         try
         {
             return Response.ok(capabilitiesService.getCapabilities()).build();
-        } catch (SQLException e)
+        } catch (FailedToGetCapabilityException e)
         {
-            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
-        } catch (DatabaseConnectionException e) {
-
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
