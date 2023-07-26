@@ -20,11 +20,10 @@ import java.sql.SQLException;
 public class JobRolesController
 {
     private JobRoleService jobRoleService;
-    private JobRoleValidator jobRoleValidator;
+
     public JobRolesController()
     {
-        jobRoleService = new JobRoleService(new JobRoleDao(), new DatabaseConnector());
-        jobRoleValidator = new JobRoleValidator();
+        jobRoleService = new JobRoleService(new JobRoleDao(), new DatabaseConnector(), new JobRoleValidator());
     }
 
     public JobRolesController(JobRoleService jobRoleService)
@@ -48,13 +47,12 @@ public class JobRolesController
 
     @POST
     @Path("/job-roles")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createRole(JobRoleRequest jobRoleRequest) {
             try {
                 int id = jobRoleService.createRole(jobRoleRequest);
                 return Response.status(HttpStatus.CREATED_201).entity(id).build();
-            } catch (FailedToCreateJobRoleException | DatabaseConnectionException e) {
+            } catch (FailedToCreateJobRoleException e) {
                 return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
             } catch (InvalidJobRoleException e) {
                 return Response.status(HttpStatus.BAD_REQUEST_400).build();

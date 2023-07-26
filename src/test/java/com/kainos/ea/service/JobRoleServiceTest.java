@@ -6,6 +6,7 @@ import com.kainos.ea.exception.InvalidJobRoleException;
 import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.JobRoleRequest;
 import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.validator.JobRoleValidator;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
@@ -22,9 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class JobRoleServiceTest {
 
     JobRoleDao jobRoleDao = Mockito.mock(JobRoleDao.class);
+    JobRoleValidator jobRoleValidator = Mockito.mock(JobRoleValidator.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
 
-    JobRoleService jobRoleService = new JobRoleService(jobRoleDao,databaseConnector);
+    JobRoleService jobRoleService = new JobRoleService(jobRoleDao,databaseConnector,jobRoleValidator);
 
     Connection conn;
 
@@ -62,7 +64,7 @@ class JobRoleServiceTest {
     }
 
     @Test
-    void createRole_shouldReturnAnID_whenDaoReturnsAnID() throws SQLException, DatabaseConnectionException, InvalidJobRoleException, FailedToCreateJobRoleException {
+    void createRole_shouldReturnAnId_whenDaoReturnsAnId() throws SQLException, DatabaseConnectionException, InvalidJobRoleException, FailedToCreateJobRoleException {
         int expectedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRoleDao.createRole(jobRoleRequest, conn)).thenReturn(expectedResult);
@@ -73,7 +75,7 @@ class JobRoleServiceTest {
     }
 
     @Test
-    void insertEmployee_shouldThrowFailedToCreateJobRoleException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
+    void createRole_shouldThrowFailedToCreateJobRoleException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(jobRoleDao.createRole(jobRoleRequest, conn)).thenThrow(SQLException.class);
 
@@ -81,5 +83,19 @@ class JobRoleServiceTest {
                 () -> jobRoleService.createRole(jobRoleRequest));
     }
 
+    @Test
+    void createRole_shouldThrowFailedToCreateJobRoleException_whenDaoThrowsDatabaseConnectionException() throws SQLException {
+        Mockito.when(jobRoleDao.createRole(jobRoleRequest, conn)).thenThrow(DatabaseConnectionException.class);
 
+        assertThrows(FailedToCreateJobRoleException.class,
+                () -> jobRoleService.createRole(jobRoleRequest));
+    }
+
+    @Test
+    void  createRole_shouldThrowFailedToCreateJobRoleException_whenValidatorReturnsNotNull() {
+        Mockito.when(jobRoleValidator.isValidJobRole(jobRoleRequest)).thenReturn("Test");
+
+        assertThrows(InvalidJobRoleException.class,
+                () -> jobRoleService.createRole(jobRoleRequest));
+    }
 }

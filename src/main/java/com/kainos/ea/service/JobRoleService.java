@@ -17,18 +17,19 @@ public class JobRoleService
     public JobRoleDao jobRoleDao;
 
     public DatabaseConnector databaseConnector;
-    public JobRoleValidator jobRoleValidator = new JobRoleValidator();
+    public JobRoleValidator jobRoleValidator;
 
-    public JobRoleService(JobRoleDao jobRoleDao, DatabaseConnector databaseConnector) {
+    public JobRoleService(JobRoleDao jobRoleDao, DatabaseConnector databaseConnector, JobRoleValidator jobRoleValidator) {
         this.jobRoleDao = jobRoleDao;
         this.databaseConnector = databaseConnector;
+        this.jobRoleValidator = jobRoleValidator;
     }
 
     public List<JobRole> getJobRoles() throws DatabaseConnectionException, SQLException {
         return jobRoleDao.getRoles(databaseConnector.getConnection());
     }
 
-    public int createRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException, DatabaseConnectionException {
+    public int createRole(JobRoleRequest jobRoleRequest) throws FailedToCreateJobRoleException, InvalidJobRoleException {
         try {
             String validation = jobRoleValidator.isValidJobRole(jobRoleRequest);
             if(validation != null){
@@ -41,7 +42,7 @@ public class JobRoleService
             }
 
             return id;
-        } catch(SQLException e) {
+        } catch(SQLException | DatabaseConnectionException e) {
             System.err.println(e.getMessage());
             throw new FailedToCreateJobRoleException();
         }
