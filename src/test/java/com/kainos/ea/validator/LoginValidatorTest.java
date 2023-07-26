@@ -19,6 +19,34 @@ public class LoginValidatorTest
     }
 
     @Test
+    void check_null_email()
+    {
+        String result = loginValidator.isValidLogin(new Login(null,"Test"));
+        assertEquals("email is empty",result);
+    }
+
+    @Test
+    void check_empty_email()
+    {
+        String result = loginValidator.isValidLogin(new Login("","Test"));
+        assertEquals("email is empty",result);
+    }
+
+    @Test
+    void check_null_password()
+    {
+        String result = loginValidator.isValidLogin(new Login("mart@kainos.com",null));
+        assertEquals("password is empty",result);
+    }
+
+    @Test
+    void check_empty_password()
+    {
+        String result = loginValidator.isValidLogin(new Login("mart@kainos.com",""));
+        assertEquals("password is empty",result);
+    }
+
+    @Test
     void check_valid_email()
     {
         String result = loginValidator.isValidLogin(new Login("Test@gmail.com","Test"));

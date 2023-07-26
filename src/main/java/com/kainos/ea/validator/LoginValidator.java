@@ -6,14 +6,9 @@ public class LoginValidator
 {
     public String isValidLogin(Login login)
     {
-        if (login.getUsername() == null)
+        if (login.getUsername() == null || login.getUsername().isEmpty())
         {
-            return "username is null";
-        }
-
-        if(login.getUsername().isEmpty())
-        {
-            return "username is empty";
+            return "email is empty";
         }
 
         // RFC 5322 Regex for email
@@ -22,12 +17,7 @@ public class LoginValidator
             return "email address not valid";
         }
 
-        if (login.getPassword() == null)
-        {
-            return "password is null";
-        }
-
-        if(login.getPassword().isEmpty())
+        if (login.getPassword() == null || login.getPassword().isEmpty())
         {
             return "password is empty";
         }
