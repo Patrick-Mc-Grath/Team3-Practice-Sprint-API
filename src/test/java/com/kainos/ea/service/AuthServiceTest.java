@@ -31,10 +31,50 @@ public class AuthServiceTest
     Connection conn;
 
     @Test
-    void Check_for_invalid_Login_exception()
+    void Check_for_invalid_Login_exception_invalid_email()
     {
         Login testData = new Login("Test","Test");
         Mockito.when(loginValidator.isValidLogin(testData)).thenReturn("email address not valid");
+
+        assertThrows(InvalidLoginException.class,
+                () -> authService.Login(testData));
+    }
+
+    @Test
+    void Check_for_invalid_Login_exception_empty_email()
+    {
+        Login testData = new Login("","Test");
+        Mockito.when(loginValidator.isValidLogin(testData)).thenReturn("username is empty");
+
+        assertThrows(InvalidLoginException.class,
+                () -> authService.Login(testData));
+    }
+
+    @Test
+    void Check_for_invalid_Login_exception_null_email()
+    {
+        Login testData = new Login(null,"Test");
+        Mockito.when(loginValidator.isValidLogin(testData)).thenReturn("username is null");
+
+        assertThrows(InvalidLoginException.class,
+                () -> authService.Login(testData));
+    }
+
+    @Test
+    void Check_for_invalid_Login_exception_empty_password()
+    {
+        Login testData = new Login("mart@kainos.com","");
+        Mockito.when(loginValidator.isValidLogin(testData)).thenReturn("username is empty");
+
+        assertThrows(InvalidLoginException.class,
+                () -> authService.Login(testData));
+    }
+
+    @Test
+    void Check_for_invalid_Login_exception_null_password()
+    {
+        Login testData = new Login("mart@kainos.com",null);
+        Mockito.when(loginValidator.isValidLogin(testData)).thenReturn("username is null");
 
         assertThrows(InvalidLoginException.class,
                 () -> authService.Login(testData));
