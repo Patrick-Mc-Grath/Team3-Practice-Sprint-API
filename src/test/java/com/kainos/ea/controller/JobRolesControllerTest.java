@@ -58,7 +58,7 @@ public class JobRolesControllerTest
     }
 
     @Test
-    void createRole_shouldReturnAccepted_whenServiceReturnsNewJobRoleId() throws InvalidJobRoleException, FailedToCreateJobRoleException {
+    void createRole_shouldReturnCreated_whenServiceReturnsNewJobRoleId() throws InvalidJobRoleException, FailedToCreateJobRoleException {
         Mockito.when(jobRoleService.createRole(jobRoleRequest)).thenReturn(1);
 
         Response response = jobRolesController.getJobRoles();

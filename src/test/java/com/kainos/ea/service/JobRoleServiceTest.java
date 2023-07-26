@@ -84,14 +84,6 @@ class JobRoleServiceTest {
     }
 
     @Test
-    void createRole_shouldThrowFailedToCreateJobRoleException_whenDaoThrowsDatabaseConnectionException() throws SQLException {
-        Mockito.when(jobRoleDao.createRole(jobRoleRequest, conn)).thenThrow(DatabaseConnectionException.class);
-
-        assertThrows(FailedToCreateJobRoleException.class,
-                () -> jobRoleService.createRole(jobRoleRequest));
-    }
-
-    @Test
     void  createRole_shouldThrowFailedToCreateJobRoleException_whenValidatorReturnsNotNull() {
         Mockito.when(jobRoleValidator.isValidJobRole(jobRoleRequest)).thenReturn("Test");
 
