@@ -36,8 +36,10 @@ public class JobRoleService
                 throw new InvalidJobRoleException(validation);
             }
             int id = jobRoleDao.createRole(jobRoleRequest, databaseConnector.getConnection());
-
+            int rolebandid = jobRoleDao.createRoleBand(id, jobRoleRequest.getBandId(), databaseConnector.getConnection());
+            System.out.println(rolebandid);
             if(id == -1){
+                System.out.println("Error here");
                 throw new FailedToCreateJobRoleException();
             }
 

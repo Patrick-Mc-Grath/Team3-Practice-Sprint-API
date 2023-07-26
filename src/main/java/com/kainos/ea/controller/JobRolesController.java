@@ -53,8 +53,10 @@ public class JobRolesController
                 int id = jobRoleService.createRole(jobRoleRequest);
                 return Response.status(HttpStatus.CREATED_201).entity(id).build();
             } catch (FailedToCreateJobRoleException e) {
+                System.err.println(e.getMessage());
                 return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
             } catch (InvalidJobRoleException e) {
+                System.err.println(e);
                 return Response.status(HttpStatus.BAD_REQUEST_400).build();
             }
     }

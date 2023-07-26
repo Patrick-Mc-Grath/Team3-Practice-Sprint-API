@@ -1,7 +1,9 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.JobRoleRequest;
+import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.List;
 
 public class JobRoleDao
 {
+    DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<JobRole> getRoles(Connection c) throws SQLException {
         Statement st = c.createStatement();
 
@@ -30,7 +33,7 @@ public class JobRoleDao
         return jobRoles;
     }
 
-    public int createRole(JobRoleRequest jobRoleRequest, Connection c) throws SQLException {
+    public int createRole(JobRoleRequest jobRoleRequest, Connection c) throws SQLException, DatabaseConnectionException {
         String insertStatement = "INSERT INTO `Job_Roles`(`role_title`, `job_family_id`) VALUES(?,?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
@@ -43,15 +46,13 @@ public class JobRoleDao
         ResultSet rs = st.getGeneratedKeys();
 
         if (rs.next()) {
-            if(createRoleBand(rs.getInt(1), jobRoleRequest.getBandId(), c) == 1) {
-                return rs.getInt(1);
-            }
+            return rs.getInt(1);
         }
 
         return -1;
     }
 
-    private int createRoleBand(int roleId, int bandId, Connection c) throws SQLException {
+    public int createRoleBand(int roleId, int bandId, Connection c) throws SQLException {
         String insertStatement = "INSERT INTO `Role_Bands`(`role_id`, `band_id`) VALUES(?,?)";
 
         PreparedStatement st = c.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
@@ -64,6 +65,7 @@ public class JobRoleDao
         ResultSet rs = st.getGeneratedKeys();
 
         if(rs.next()) {
+            System.out.println("Does this run");
             return 1;
         }
 
