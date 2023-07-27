@@ -1,6 +1,6 @@
 package com.kainos.ea.controller;
 
-import com.kainos.ea.dao.CapabilitiesDao;
+import com.kainos.ea.dao.CapabilityDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
@@ -25,7 +25,7 @@ public class CapabilityController {
     private CapabilityService capabilityService;
 
     public CapabilityController() {
-        capabilityService = new CapabilityService(new CapabilitiesDao(), new DatabaseConnector());
+        capabilityService = new CapabilityService(new CapabilityDao(), new DatabaseConnector());
     }
 
     public CapabilityController(CapabilityService capabilityService) {

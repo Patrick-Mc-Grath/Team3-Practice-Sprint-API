@@ -1,6 +1,6 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.CapabilitiesDao;
+import com.kainos.ea.dao.CapabilityDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 public class CapabilityServiceTest {
 
-    CapabilitiesDao capDao = Mockito.mock(CapabilitiesDao.class);
+    CapabilityDao capDao = Mockito.mock(CapabilityDao.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
     CapabilityService capService = new CapabilityService(capDao, databaseConnector);
     Connection conn;
