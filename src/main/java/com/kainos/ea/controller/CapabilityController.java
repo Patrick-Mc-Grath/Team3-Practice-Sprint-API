@@ -12,11 +12,16 @@ import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
+import com.kainos.ea.dao.CapabilitiesDao;
+import com.kainos.ea.exception.FailedToGetCapabilityException;
+import com.kainos.ea.service.CapabilitiesService;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
+
 
 @Api("Backend API Capabilities")
 @Path("/api")
@@ -53,6 +58,19 @@ public class CapabilityController {
             }
         } catch (NameLengthException | DescriptionLengthException e) {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
+
+
+    @GET
+    @Path("/capabilities")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCapabilities()
+    {
+        try
+        {
+            return Response.ok(capabilitiesService.getCapabilities()).build();
+        } catch (FailedToGetCapabilityException e)
+        {
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
 }

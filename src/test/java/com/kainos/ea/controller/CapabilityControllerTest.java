@@ -1,5 +1,4 @@
 package com.kainos.ea.controller;
-
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
@@ -15,6 +14,7 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ExtendWith(DropwizardExtensionsSupport.class)
 @ExtendWith(MockitoExtension.class)
 public class CapabilityControllerTest {
 
@@ -67,4 +67,19 @@ public class CapabilityControllerTest {
 
         assertEquals(expected, actual);
     }
+
+
+    CapabilitiesService capabilitiesService = Mockito.mock(CapabilitiesService.class);
+
+    CapabilityController capabilityController = new CapabilityController(capabilitiesService);
+
+    @Test
+    void check_for_SQL_Exception() throws FailedToGetCapabilityException
+    {
+        Mockito.when(capabilitiesService.getCapabilities()).thenThrow(new FailedToGetCapabilityException());
+
+        Response response = capabilityController.getCapabilities();
+        Assertions.assertEquals(500,response.getStatus());
+    }
 }
+
