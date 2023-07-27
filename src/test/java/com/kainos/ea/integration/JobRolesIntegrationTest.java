@@ -1,4 +1,5 @@
 package com.kainos.ea.integration;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;

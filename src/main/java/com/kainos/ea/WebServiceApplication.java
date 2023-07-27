@@ -1,5 +1,7 @@
 package com.kainos.ea;
 
+import com.kainos.ea.controller.BandController;
+import com.kainos.ea.controller.JobFamilyController;
 import com.kainos.ea.controller.JobRolesController;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -32,6 +34,8 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     public void run(final WebServiceConfiguration configuration,
                     final Environment environment) {
         environment.jersey().register(new JobRolesController());
+        environment.jersey().register(new BandController());
+        environment.jersey().register(new JobFamilyController());
     }
 
 }
