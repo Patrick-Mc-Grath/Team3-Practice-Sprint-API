@@ -5,10 +5,7 @@ import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.model.CapabilityRequest;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kainos.ea.WebServiceApplication;
-import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.model.Capabilities;
-import com.kainos.ea.model.JobRole;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -19,7 +16,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 
@@ -102,6 +98,7 @@ public class CapabilityIntegrationTest {
         Assertions.assertEquals(400, response.getStatus());
     }
 
+    @Test
     void getCapabilities_shouldReturnListOfCapabilities() {
         ObjectMapper mapper = new ObjectMapper();
         Invocation.Builder response = APP.client().target("http://localhost:8080/api/capabilities")

@@ -1,6 +1,5 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.CapabilityDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
@@ -24,9 +23,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @ExtendWith(MockitoExtension.class)
 public class CapabilityServiceTest {
 
-    CapabilityDao capDao = Mockito.mock(CapabilityDao.class);
+    CapabilitiesDao capabilitiesDao = Mockito.mock(CapabilitiesDao.class);
     DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
-    CapabilityService capService = new CapabilityService(capDao, databaseConnector);
+    CapabilitiesService capabilitiesService = new CapabilitiesService(capabilitiesDao, databaseConnector);
     Connection conn;
     CapabilityRequest capRequest = new CapabilityRequest(
             "Test",
@@ -37,9 +36,9 @@ public class CapabilityServiceTest {
     void insertCapability_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
         int expectedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(capDao.insertCapability(capRequest, conn)).thenReturn(expectedResult);
+        Mockito.when(capabilitiesDao.insertCapability(capRequest, conn)).thenReturn(expectedResult);
 
-        int result = capService.insertCapability(capRequest);
+        int result = capabilitiesService.insertCapability(capRequest);
 
         assertEquals(result, expectedResult);
     }
@@ -47,20 +46,11 @@ public class CapabilityServiceTest {
     @Test
     void insertCapability_shouldThrowSqlException_whenDaoThrowsSqlException() throws SQLException, DatabaseConnectionException {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(capDao.insertCapability(capRequest, conn)).thenThrow(SQLException.class);
+        Mockito.when(capabilitiesDao.insertCapability(capRequest, conn)).thenThrow(SQLException.class);
 
         assertThrows(SQLException.class,
-                () -> capService.insertCapability(capRequest));
+                () -> capabilitiesService.insertCapability(capRequest));
     }
-
-
-
-    CapabilitiesDao capabilitiesDao = Mockito.mock(CapabilitiesDao.class);
-    DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
-
-    CapabilitiesService capabilitiesService = new CapabilitiesService(capabilitiesDao,databaseConnector);
-
-    Connection conn;
 
     @Test
     void getCapabilities_Should_Return_Arraylist() throws DatabaseConnectionException, SQLException, FailedToGetCapabilityException {

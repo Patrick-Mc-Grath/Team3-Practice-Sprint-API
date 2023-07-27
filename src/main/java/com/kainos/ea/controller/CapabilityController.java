@@ -1,20 +1,18 @@
 package com.kainos.ea.controller;
 
-import com.kainos.ea.dao.CapabilityDao;
+import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
-import com.kainos.ea.service.CapabilityService;
+import com.kainos.ea.service.CapabilitiesService;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.validator.CapabilityValidator;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
-import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.FailedToGetCapabilityException;
-import com.kainos.ea.service.CapabilitiesService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -27,16 +25,15 @@ import java.sql.SQLException;
 @Path("/api")
 public class CapabilityController {
 
-    private CapabilityService capabilityService;
+    private CapabilitiesService capabilitiesService;
 
     public CapabilityController() {
-        capabilityService = new CapabilityService(new CapabilityDao(), new DatabaseConnector());
+        capabilitiesService = new CapabilitiesService(new CapabilitiesDao(), new DatabaseConnector());
     }
 
-    public CapabilityController(CapabilityService capabilityService) {
-        this.capabilityService = capabilityService;
+    public CapabilityController(CapabilitiesService capabilitiesService) {
+        this.capabilitiesService = capabilitiesService;
     }
-
     CapabilityValidator capabilityValidator = new CapabilityValidator();
 
     @POST
@@ -47,7 +44,7 @@ public class CapabilityController {
         try {
             if (capabilityValidator.isValidCapability(cap)) {
                 try {
-                    int id = capabilityService.insertCapability(cap);
+                    int id = capabilitiesService.insertCapability(cap);
                     return Response.status(HttpStatus.CREATED_201).entity(id).build();
                 } catch (DatabaseConnectionException | SQLException e) {
                     System.out.println(e);
@@ -58,19 +55,19 @@ public class CapabilityController {
             }
         } catch (NameLengthException | DescriptionLengthException e) {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
-
+        }
+    }
 
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCapabilities()
+    public Response getCapabilities ()
     {
-        try
-        {
+        try {
             return Response.ok(capabilitiesService.getCapabilities()).build();
-        } catch (FailedToGetCapabilityException e)
-        {
+        } catch (FailedToGetCapabilityException e) {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
 }
+
