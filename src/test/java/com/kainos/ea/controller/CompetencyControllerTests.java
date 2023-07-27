@@ -15,19 +15,11 @@ import javax.ws.rs.core.Response;
 import java.sql.Connection;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
-    public class CompetencyControllerTests
-    {
+    public class CompetencyControllerTests {
 
         CompetencyService compService = Mockito.mock(CompetencyService.class);
-
         CompetencyController compController = new CompetencyController(compService);
-
         Connection conn;
-
-        static final DropwizardAppExtension<WebServiceConfiguration> APP = new DropwizardAppExtension<>(
-                WebServiceApplication.class, null,
-                new ResourceConfigurationSourceProvider()
-        );
 
         @Test
         void check_for_failedToGetCompsException() throws  FailedToGetCompsException {
@@ -35,6 +27,5 @@ import java.sql.Connection;
             Response response = compController.getCompetenciesWithBand(1);
             Assertions.assertEquals(500,response.getStatus());
         }
-
     }
 

@@ -1,7 +1,7 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.model.CompetencyRequest;
+import com.kainos.ea.model.CompetencyResponse;
 import com.kainos.ea.exception.FailedToGetCompsException;
 import com.kainos.ea.dao.CompetencyDao;
 import com.kainos.ea.util.DatabaseConnector;
@@ -23,7 +23,7 @@ public class CompetencyServiceTest {
     CompetencyDao compDao = Mockito.mock(CompetencyDao.class);
     DatabaseConnector dbConnector = Mockito.mock(DatabaseConnector.class);
     CompetencyService compService = new CompetencyService(compDao, dbConnector);
-    List<CompetencyRequest> comps = new ArrayList<>();
+    List<CompetencyResponse> comps = new ArrayList<>();
     Connection connection;
     int bandId = 1;
 

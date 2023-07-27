@@ -1,7 +1,7 @@
 package com.kainos.ea.service;
 import com.kainos.ea.dao.CompetencyDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.model.CompetencyRequest;
+import com.kainos.ea.model.CompetencyResponse;
 import com.kainos.ea.exception.FailedToGetCompsException;
 import com.kainos.ea.util.DatabaseConnector;
 
@@ -21,8 +21,8 @@ public class CompetencyService {
         this.dbConnector = dbConnector;
     }
 
-    public List<CompetencyRequest> getAllCompsWithBand(int bandId) throws FailedToGetCompsException {
-        List<CompetencyRequest> competencyList = null;
+    public List<CompetencyResponse> getAllCompsWithBand(int bandId) throws FailedToGetCompsException {
+        List<CompetencyResponse> competencyList = null;
         try {
             Connection conn = dbConnector.getConnection();
             competencyList = compDao.getAllCompsAndBand(bandId, conn);
@@ -33,13 +33,4 @@ public class CompetencyService {
             throw new FailedToGetCompsException();
         }
     }
-
-
-
 }
-
-
-
-
-
-

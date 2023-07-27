@@ -2,7 +2,7 @@ package com.kainos.ea.integration;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.model.CompetencyRequest;
+import com.kainos.ea.model.CompetencyResponse;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -22,7 +22,7 @@ public class CompetencyIntegrationTest {
     @Test
     void getCompsByBand_shouldReturnAListOfComps() {
         int bandId = 1;
-        List<CompetencyRequest> response = APP.client().target("http://localhost:8080/api/competencies/" + bandId)
+        List<CompetencyResponse> response = APP.client().target("http://localhost:8080/api/competencies/" + bandId)
                 .request()
                 .get(List.class);
 

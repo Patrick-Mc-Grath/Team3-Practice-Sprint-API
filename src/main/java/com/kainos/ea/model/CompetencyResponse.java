@@ -1,20 +1,24 @@
 package com.kainos.ea.model;
 
-public class CompetencyRequest {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class CompetencyResponse {
 
     private String competencyName;
     private String description;
     private String bandName;
 
 
-    public CompetencyRequest(String competencyName, String description, String bandName) {
-
-        this.competencyName = competencyName;
-        this.description = description;
-        this.bandName = bandName;
+    @JsonCreator
+    public CompetencyResponse(
+            @JsonProperty("competencyName") String competencyName,
+            @JsonProperty("description") String description,
+            @JsonProperty("bandName") String bandName) {
+        this.setCompetencyName(competencyName);
+        this.setDescription(description);
+        this.setBandName(bandName);
     }
-
 
     public String getCompetencyName() {
         return competencyName;
