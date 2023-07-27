@@ -4,6 +4,9 @@ import com.kainos.ea.controller.AuthController;
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
 import io.dropwizard.Application;
+import io.dropwizard.bundles.redirect.HttpsRedirect;
+import io.dropwizard.bundles.redirect.PathRedirect;
+import io.dropwizard.bundles.redirect.RedirectBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
@@ -28,6 +31,9 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
                 return configuration.getSwagger();
             }
         });
+        bootstrap.addBundle(new RedirectBundle(
+                new HttpsRedirect()
+        ));
     }
 
     @Override

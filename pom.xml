@@ -121,6 +121,11 @@
             <version>0.11.1</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>io.dropwizard-bundles</groupId>
+            <artifactId>dropwizard-redirect-bundle</artifactId>
+            <version>1.0.5</version>
+        </dependency>
     </dependencies>
 
     <build>
