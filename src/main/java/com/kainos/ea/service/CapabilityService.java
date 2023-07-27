@@ -1,21 +1,20 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.CapabilityDao;
+import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.DescriptionLengthException;
 import com.kainos.ea.exception.NameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.util.DatabaseConnector;
-import com.kainos.ea.validator.CapabilityValidator;
 
 import java.sql.SQLException;
 
 public class CapabilityService {
 
-    private CapabilityDao capDao = new CapabilityDao();
+    private CapabilitiesDao capDao = new CapabilitiesDao();
     private DatabaseConnector databaseConnector = new DatabaseConnector();
 
-    public CapabilityService(CapabilityDao capDao, DatabaseConnector databaseConnector) {
+    public CapabilityService(CapabilitiesDao capDao, DatabaseConnector databaseConnector) {
         this.capDao = capDao;
         this.databaseConnector = databaseConnector;
     }

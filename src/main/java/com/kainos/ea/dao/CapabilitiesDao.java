@@ -3,7 +3,7 @@ package com.kainos.ea.dao;
 import com.kainos.ea.model.CapabilityRequest;
 import java.sql.*;
 
-public class CapabilityDao {
+public class CapabilitiesDao {
 
     public int insertCapability(CapabilityRequest cap, Connection c) throws SQLException {
         String insertCapabilityQuery = "INSERT INTO Capabilities (name, description) values (?, ?)";
