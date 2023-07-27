@@ -1,5 +1,4 @@
 package com.kainos.ea.service;
-import com.kainos.ea.dao.JobRoleDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.JobRole;
 import com.kainos.ea.util.DatabaseConnector;
