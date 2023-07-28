@@ -3,6 +3,7 @@ package com.kainos.ea.controller;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.service.JobRoleService;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
