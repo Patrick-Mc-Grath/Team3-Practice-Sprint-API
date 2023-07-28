@@ -20,7 +20,8 @@ public class JobRoleDao
                   + " INNER JOIN Job_Families USING(job_family_id)"
                   + " INNER JOIN Capabilities USING(capability_id)"
                   + " INNER JOIN Role_Bands USING(role_id)"
-                  + " INNER JOIN Bands USING(band_id);"
+                  + " INNER JOIN Bands USING(band_id)"
+                  + " ORDER BY Job_Roles.role_id ASC;"
         );
         
         List<JobRole> jobRoles = new ArrayList<>();
