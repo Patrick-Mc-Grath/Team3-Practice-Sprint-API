@@ -15,10 +15,14 @@ public class JobRoleDao
         Statement st = c.createStatement();
 
 
-        ResultSet rs = st.executeQuery(" SELECT Job_Roles.role_id, Job_Roles.role_title, Capabilities.name " +
-                                        " FROM Job_Families " +
-                                        " INNER JOIN Job_Roles on Job_Roles.job_family_id = Job_Families.job_family_id " +
-                                        " INNER JOIN Capabilities on Capabilities.capability_id  = Job_Families.capability_id;");
+        ResultSet rs = st.executeQuery(
+            "SELECT Job_Roles.role_id, Job_Roles.role_title, Capabilities.name, Role_Bands.band_id, Bands.band_name"
+                  + " FROM Job_Roles"
+                  + " INNER JOIN Job_Families USING(job_family_id)"
+                  + " INNER JOIN Capabilities USING(capability_id)"
+                  + " INNER JOIN Role_Bands USING(role_id)"
+                  + " INNER JOIN Bands USING(band_id);"
+        );
 
 
         List<JobRole> jobRoles = new ArrayList<>();
@@ -27,7 +31,9 @@ public class JobRoleDao
             JobRole role = new JobRole(
                     rs.getInt("role_id"),
                     rs.getString("role_title"),
-                    rs.getString("Capabilities.name")
+                    rs.getString("Capabilities.name"),
+                    rs.getInt("Role_Bands.band_id"),
+                    rs.getString("Bands.band_name")
             );
             jobRoles.add(role);
         }
