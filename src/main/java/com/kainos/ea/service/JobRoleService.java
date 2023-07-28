@@ -9,8 +9,7 @@ import com.kainos.ea.util.DatabaseConnector;
 import java.sql.SQLException;
 import java.util.List;
 
-public class JobRoleService
-{
+public class JobRoleService {
     public JobRoleDao jobRoleDao;
 
     public DatabaseConnector databaseConnector;
@@ -21,7 +20,6 @@ public class JobRoleService
     }
 
     public List<JobRoleResponse> getJobRoles() throws DatabaseConnectionException, SQLException {
-        try {
-            return jobRoleDao.getRoles(databaseConnector.getConnection());
+        return jobRoleDao.getRoles(databaseConnector.getConnection());
     }
 }
