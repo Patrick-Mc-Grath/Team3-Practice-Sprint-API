@@ -1,5 +1,6 @@
 package com.kainos.ea;
 
+import com.kainos.ea.controller.BandController;
 import com.kainos.ea.controller.TrainingController;
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
@@ -36,6 +37,7 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
         environment.jersey().register(new TrainingController());
         environment.jersey().register(new JobRolesController());
         environment.jersey().register(new CapabilityController());
+        environment.jersey().register(new BandController());
     }
 
 }
