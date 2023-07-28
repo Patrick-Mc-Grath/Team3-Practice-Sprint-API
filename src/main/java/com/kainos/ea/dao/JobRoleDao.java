@@ -30,8 +30,8 @@ public class JobRoleDao
                         rs.getInt("role_id"),
                         rs.getString("role_title"),
                         rs.getString("band_name"),
-                        rs.getString("name"),
-                        rs.getString("name")
+                        rs.getString("job_family_name"),
+                        rs.getString("capability_name")
                 );
                 jobRoles.add(role);
             }
