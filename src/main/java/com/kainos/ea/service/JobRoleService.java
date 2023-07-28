@@ -21,6 +21,11 @@ public class JobRoleService
     }
 
     public List<JobRoleResponse> getJobRoles() throws DatabaseConnectionException, SQLException {
-        return jobRoleDao.getRoles(databaseConnector.getConnection());
+        try {
+            return jobRoleDao.getRoles(databaseConnector.getConnection());
+        } catch(DatabaseConnectionException | SQLException e) {
+            System.err.println(e);
+            throw new SQLException();
+        }
     }
 }

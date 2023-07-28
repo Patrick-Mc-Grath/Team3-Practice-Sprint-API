@@ -1,6 +1,5 @@
 package com.kainos.ea;
 
-import com.kainos.ea.controller.RoleBandController;
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
 import io.dropwizard.Application;
@@ -33,7 +32,6 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     @Override
     public void run(final WebServiceConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new RoleBandController());
         environment.jersey().register(new JobRolesController());
         environment.jersey().register(new CapabilityController());
     }

@@ -10,7 +10,7 @@ public class JobRoleResponse {
     private String jobFamilyName;
     private String capabilityName;
 
-    public int getRole_id() {
+    public int getRoleId() {
         return roleId;
     }
 
