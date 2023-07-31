@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ US036-api-deploy ]
+    branches: [ main ]
 
 jobs:
 
