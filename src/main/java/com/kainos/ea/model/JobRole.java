@@ -9,21 +9,43 @@ public class JobRole
     private String roleTitle;
     private int job_family_id;
     private String capabilityName;
+    private int bandId;
+    private String bandName;
 
     @JsonCreator
     public JobRole(
-                   @JsonProperty("role_id") int roleId,
-                   @JsonProperty("role_title") String roleTitle,
-                   @JsonProperty("job_family_id") int job_family_id,
-                   @JsonProperty("Capabilities.name") String capabilityName)
-    {
+             @JsonProperty("role_id") int roleId,
+             @JsonProperty("role_title") String roleTitle,
+             @JsonProperty("job_family_id") int job_family_id,
+             @JsonProperty("Capabilities.name") String capabilityName,
+             @JsonProperty("Role_Bands.band_id") int bandId,
+             @JsonProperty("Role_Bands.band_name") String bandName
+    ) {
         setRoleId(roleId);
         setRoleTitle(roleTitle);
         setJob_family_id(job_family_id);
         setCapabilityName(capabilityName);
+        setBandId(bandId);
+        setBandName(bandName);
     }
 
-    public int getRoleId() {
+    public String getBandName() {
+        return bandName;
+    }
+
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
+    }
+
+    public int getBandId() {
+    return bandId;
+  }
+
+  public void setBandId(int bandId) {
+    this.bandId = bandId;
+  }
+
+  public int getRoleId() {
         return roleId;
     }
 

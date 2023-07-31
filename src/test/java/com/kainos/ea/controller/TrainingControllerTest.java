@@ -24,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(MockitoExtension.class)
 public class TrainingControllerTest {
 
-    TrainingDao trainingDao = Mockito.mock(TrainingDao.class);
-    DatabaseConnector databaseConnector = Mockito.mock(DatabaseConnector.class);
     TrainingService trainingService = Mockito.mock(TrainingService.class);
     TrainingController trainingController = new TrainingController(trainingService);
     Connection conn;
@@ -37,8 +35,6 @@ public class TrainingControllerTest {
 
         int expected = Response.ok().entity(trainingList).build().getStatus();
 
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(trainingDao.getTrainingByBand(bandId, conn)).thenReturn(trainingList);
         Mockito.when(trainingService.getTrainingByBand(bandId)).thenReturn(trainingList);
 
         int actual = trainingController.getTrainingByBand(bandId).getStatus();
@@ -53,8 +49,6 @@ public class TrainingControllerTest {
         List<TrainingRequest> trainingList = new ArrayList<>();
         int expected = Response.status(HttpStatus.BAD_REQUEST_400).build().getStatus();
 
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(trainingDao.getTrainingByBand(bandId, conn)).thenReturn(trainingList);
         Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(TrainingDoesNotExistException.class);
 
         int actual = trainingController.getTrainingByBand(bandId).getStatus();
@@ -92,8 +86,6 @@ public class TrainingControllerTest {
 
         int expected = Response.ok().entity(categories).build().getStatus();
 
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(trainingDao.getTrainingCategories(conn)).thenReturn(categories);
         Mockito.when(trainingService.getTrainingCategories()).thenReturn(categories);
 
         int actual = trainingController.getTrainingCategories().getStatus();

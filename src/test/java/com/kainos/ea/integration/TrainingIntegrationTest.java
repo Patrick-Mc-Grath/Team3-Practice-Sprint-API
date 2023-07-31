@@ -1,15 +1,17 @@
 package com.kainos.ea.integration;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.model.TrainingRequest;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
+import javax.ws.rs.client.Invocation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-
 import javax.ws.rs.core.Response;
 import java.util.List;
 
@@ -23,11 +25,17 @@ public class TrainingIntegrationTest {
     @Test
     void getTrainingByBand_shouldReturnListOfTrainingCourses() {
         int id = 1;
-        List<TrainingRequest> response = APP.client().target("http://localhost:8080/api/training/" + id)
-                .request()
-                .get(List.class);
+        ObjectMapper mapper = new ObjectMapper();
+        Invocation.Builder response = APP.client().target("http://localhost:8080/api/training/" + id)
+            .request();
 
-        Assertions.assertTrue(response.size() > 0);
+        List<TrainingRequest> trainingRequests = response.get(List.class);
+
+        List<TrainingRequest> pojos = mapper.convertValue(trainingRequests, new TypeReference<List<TrainingRequest>>() { });
+
+        Assertions.assertTrue(pojos.size() > 0);
+        Assertions.assertEquals("Test professional skills training", pojos.get(0).getName());
+        Assertions.assertEquals(200, response.get().getStatus());
     }
 
     @Test
