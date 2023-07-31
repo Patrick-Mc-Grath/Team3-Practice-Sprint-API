@@ -1,11 +1,15 @@
 package com.kainos.ea.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TrainingRequest {
     private String name;
     private String link;
     private String category;
 
-    public TrainingRequest(String name, String link, String category) {
+    @JsonCreator
+    public TrainingRequest(@JsonProperty("name") String name, @JsonProperty("link") String link, @JsonProperty("category") String category) {
         setName(name);
         setLink(link);
         setCategory(category);
