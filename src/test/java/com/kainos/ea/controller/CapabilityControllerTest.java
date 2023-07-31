@@ -1,8 +1,8 @@
 package com.kainos.ea.controller;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.exception.DescriptionLengthException;
+import com.kainos.ea.exception.CapabilityDescriptionLengthException;
 import com.kainos.ea.exception.FailedToGetCapabilityException;
-import com.kainos.ea.exception.NameLengthException;
+import com.kainos.ea.exception.CapabilityNameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.service.CapabilitiesService;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -25,7 +25,7 @@ public class CapabilityControllerTest {
     CapabilityRequest capabilityRequest = new CapabilityRequest("Test", "Testing");
 
     @Test
-    void createCapability_shouldReturnOk_whenCapabilityIsCreated() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    void createCapability_shouldReturnOk_whenCapabilityIsCreated() throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         int testID = 23;
         Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenReturn(testID);
         int expected = Response.status(HttpStatus.CREATED_201).build().getStatus();
@@ -35,25 +35,25 @@ public class CapabilityControllerTest {
     }
 
     @Test
-    void createCapability_shouldReturn400_whenNameLengthException() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    void createCapability_shouldReturn400_whenNameLengthException() throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         int expected = Response.status(HttpStatus.BAD_REQUEST_400).build().getStatus();
-        Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenThrow(NameLengthException.class);
+        Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenThrow(CapabilityNameLengthException.class);
         int actual = capabilityController.createCapability(capabilityRequest).getStatus();
 
         assertEquals(expected, actual);
     }
 
     @Test
-    void createCapability_shouldReturn400_whenDescriptionLengthException() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    void createCapability_shouldReturn400_whenDescriptionLengthException() throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         int expected = Response.status(HttpStatus.BAD_REQUEST_400).build().getStatus();
-        Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenThrow(DescriptionLengthException.class);
+        Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenThrow(CapabilityDescriptionLengthException.class);
         int actual = capabilityController.createCapability(capabilityRequest).getStatus();
 
         assertEquals(expected, actual);
     }
 
     @Test
-    void createCapability_shouldReturn500_whenServiceThrowsDatabaseConnectionException() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    void createCapability_shouldReturn500_whenServiceThrowsDatabaseConnectionException() throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         int expected = 500;
         Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenThrow(DatabaseConnectionException.class);
         int actual = capabilityController.createCapability(capabilityRequest).getStatus();
@@ -62,7 +62,7 @@ public class CapabilityControllerTest {
     }
 
     @Test
-    void createCapability_shouldReturn500_whenServiceThrowsSQLException() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    void createCapability_shouldReturn500_whenServiceThrowsSQLException() throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         int expected = 500;
         Mockito.when(capabilitiesService.insertCapability(capabilityRequest)).thenThrow(SQLException.class);
         int actual = capabilityController.createCapability(capabilityRequest).getStatus();

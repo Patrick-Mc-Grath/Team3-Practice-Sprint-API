@@ -1,8 +1,8 @@
 package com.kainos.ea.service;
 
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.exception.DescriptionLengthException;
-import com.kainos.ea.exception.NameLengthException;
+import com.kainos.ea.exception.CapabilityDescriptionLengthException;
+import com.kainos.ea.exception.CapabilityNameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.FailedToGetCapabilityException;
@@ -33,7 +33,7 @@ public class CapabilityServiceTest {
     );
 
     @Test
-    void insertCapability_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    void insertCapability_shouldReturnId_whenDaoReturnsId() throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         int expectedResult = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(capabilitiesDao.insertCapability(capRequest, conn)).thenReturn(expectedResult);

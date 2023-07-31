@@ -2,8 +2,8 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.exception.DescriptionLengthException;
-import com.kainos.ea.exception.NameLengthException;
+import com.kainos.ea.exception.CapabilityDescriptionLengthException;
+import com.kainos.ea.exception.CapabilityNameLengthException;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.service.CapabilitiesService;
 import com.kainos.ea.util.DatabaseConnector;
@@ -40,7 +40,7 @@ public class CapabilityController {
     @Path("/capabilities")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException, NameLengthException, DescriptionLengthException {
+    public Response createCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         try {
             if (capabilityValidator.isValidCapability(cap)) {
                 try {
@@ -53,7 +53,7 @@ public class CapabilityController {
             } else {
                 return Response.status(HttpStatus.BAD_REQUEST_400).build();
             }
-        } catch (NameLengthException | DescriptionLengthException e) {
+        } catch (CapabilityNameLengthException | CapabilityDescriptionLengthException e) {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
