@@ -24,7 +24,7 @@ public class CompetencyIntegrationTest {
             new ResourceConfigurationSourceProvider());
 
     @Test
-    void getCompsbyBand_shouldReturnListOfComps()  {
+    void getCompsByBand_shouldReturnListOfComps()  {
         int bandId = 1;
         ObjectMapper mapper = new ObjectMapper();
         Invocation.Builder response = APP.client().target("http://localhost:8080/api/competencies/" + bandId)
