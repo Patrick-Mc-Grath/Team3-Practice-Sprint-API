@@ -1,5 +1,6 @@
 package com.kainos.ea.dao;
 
+import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.model.CompetencyResponse;
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,5 +1,6 @@
 package com.kainos.ea.service;
 
+import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CompetencyResponse;
 import com.kainos.ea.exception.FailedToGetCompsException;
@@ -28,7 +29,7 @@ public class CompetencyServiceTest {
     int bandId = 1;
 
     @Test
-    void getCompsWithBand_shouldReturnAListOfComps_whenDaoReturnsListOfComps() throws SQLException, DatabaseConnectionException, FailedToGetCompsException {
+    void getCompsWithBand_shouldReturnAListOfComps_whenDaoReturnsListOfComps() throws SQLException, DatabaseConnectionException, FailedToGetCompsException, BandDoesNotExistException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
         Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenReturn(comps);
 

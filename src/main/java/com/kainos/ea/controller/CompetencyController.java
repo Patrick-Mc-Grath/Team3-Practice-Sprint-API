@@ -1,10 +1,12 @@
 package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.CompetencyDao;
+import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.service.CompetencyService;
 import com.kainos.ea.exception.FailedToGetCompsException;
 import io.swagger.annotations.Api;
+import org.eclipse.jetty.http.HttpStatus;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -37,8 +39,9 @@ public class CompetencyController {
             return Response.ok(competencyService.getAllCompsWithBand(bandId)).build();
         } catch (FailedToGetCompsException e) {
             System.err.println(e.getMessage());
-
             return Response.serverError().build();
+        } catch (BandDoesNotExistException e) {
+            return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
 
