@@ -1,6 +1,5 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CompetencyResponse;
 import com.kainos.ea.exception.FailedToGetCompsException;
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,7 +27,7 @@ public class CompetencyServiceTest {
     int bandId = 1;
 
     @Test
-    void getCompsWithBand_shouldReturnAListOfComps_whenDaoReturnsListOfComps() throws SQLException, DatabaseConnectionException, FailedToGetCompsException, BandDoesNotExistException {
+    void getCompsWithBand_shouldReturnAListOfComps_whenDaoReturnsListOfComps() throws SQLException, DatabaseConnectionException, FailedToGetCompsException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
         Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenReturn(comps);
 

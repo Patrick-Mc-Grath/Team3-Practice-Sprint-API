@@ -1,6 +1,5 @@
 package com.kainos.ea.service;
 import com.kainos.ea.dao.CompetencyDao;
-import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.CompetencyResponse;
 import com.kainos.ea.exception.FailedToGetCompsException;
@@ -22,15 +21,12 @@ public class CompetencyService {
         this.dbConnector = dbConnector;
     }
 
-    public List<CompetencyResponse> getAllCompsWithBand(int bandId) throws FailedToGetCompsException, BandDoesNotExistException {
+    public List<CompetencyResponse> getAllCompsWithBand(int bandId) throws FailedToGetCompsException {
         List<CompetencyResponse> competencyList = null;
         try {
             Connection conn = dbConnector.getConnection();
             competencyList = compDao.getAllCompsAndBand(bandId, conn);
 
-            if (competencyList.isEmpty()) {
-                throw new BandDoesNotExistException();
-            }
             return competencyList;
         } catch (SQLException | DatabaseConnectionException e) {
             System.err.println(e.getMessage());

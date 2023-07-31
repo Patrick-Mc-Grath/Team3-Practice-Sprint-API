@@ -39,12 +39,4 @@ public class CompetencyIntegrationTest {
 
         Assertions.assertEquals(200, response.get().getStatus());
     }
-
-    @Test
-    void getCompsByBand_shouldReturn400_whenIdDoesNotExist() {
-        int bandId = 123456;
-        Response response = APP.client().target("http://localhost:8080/api/competencies/" + bandId).request().get(Response.class);
-
-        Assertions.assertEquals(400, response.getStatus());
-    }
 }

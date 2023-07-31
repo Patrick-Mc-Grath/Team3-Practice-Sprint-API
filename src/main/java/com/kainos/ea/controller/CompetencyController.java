@@ -1,7 +1,6 @@
 package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.CompetencyDao;
-import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.service.CompetencyService;
 import com.kainos.ea.exception.FailedToGetCompsException;
@@ -40,8 +39,6 @@ public class CompetencyController {
         } catch (FailedToGetCompsException e) {
             System.err.println(e.getMessage());
             return Response.serverError().build();
-        } catch (BandDoesNotExistException e) {
-            return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }
     }
 
