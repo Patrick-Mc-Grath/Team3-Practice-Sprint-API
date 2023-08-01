@@ -26,7 +26,6 @@ public class TrainingControllerTest {
 
     TrainingService trainingService = Mockito.mock(TrainingService.class);
     TrainingController trainingController = new TrainingController(trainingService);
-    Connection conn;
 
     @Test
     void getTrainingByBand_shouldReturnOk_whenServiceReturnsListOfTrainingCourses() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException, FailedToGetTrainingException {
