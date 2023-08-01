@@ -32,9 +32,9 @@ public class TrainingController {
     }
 
     @GET
-    @Path("/training/{id}")
+    @Path("/training/{bandId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTrainingByBand(@PathParam("id") int bandId) {
+    public Response getTrainingByBand(@PathParam("bandId") int bandId) {
         try{
             return Response.status(HttpStatus.OK_200).entity(trainingService.getTrainingByBand(bandId)).build();
         } catch (TrainingDoesNotExistException e) {
