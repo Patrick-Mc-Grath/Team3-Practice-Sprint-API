@@ -1,9 +1,6 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.BandDao;
-import com.kainos.ea.exception.BandDoesNotExistException;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.model.Band;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
