@@ -16,7 +16,7 @@ public class TrainingDao {
 
         ArrayList<TrainingResponse> trainingList = new ArrayList<>();
 
-        String selectStatement = "SELECT Training.name, Training.link, Training_Categories.name FROM Training JOIN Training_Bands USING(training_id) JOIN Training_Categories USING(training_category_id) JOIN Bands USING(band_id) WHERE band_id = " + bandId;
+        String selectStatement = "SELECT Training.name, Training.link, Training_Categories.name, Bands.band_name FROM Training JOIN Training_Bands USING(training_id) JOIN Training_Categories USING(training_category_id) JOIN Bands USING(band_id) WHERE band_id = " + bandId;
 
         ResultSet rs = st.executeQuery(selectStatement);
 
@@ -24,7 +24,8 @@ public class TrainingDao {
             TrainingResponse training = new TrainingResponse(
                     rs.getString("Training.name"),
                     rs.getString("Training.link"),
-                    rs.getString("Training_Categories.name")
+                    rs.getString("Training_Categories.name"),
+                    rs.getString("Bands.band_name")
             );
             trainingList.add(training);
         }

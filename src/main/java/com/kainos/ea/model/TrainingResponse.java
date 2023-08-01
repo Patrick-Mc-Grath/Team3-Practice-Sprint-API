@@ -7,12 +7,22 @@ public class TrainingResponse {
     private String name;
     private String link;
     private String category;
+    private String bandName;
 
     @JsonCreator
-    public TrainingResponse(@JsonProperty("name") String name, @JsonProperty("link") String link, @JsonProperty("category") String category) {
+    public TrainingResponse(@JsonProperty("name") String name, @JsonProperty("link") String link, @JsonProperty("category") String category, @JsonProperty("bandName") String bandName) {
         setName(name);
         setLink(link);
         setCategory(category);
+        setBandName(bandName);
+    }
+
+    public String getBandName() {
+        return bandName;
+    }
+
+    public void setBandName(String bandName) {
+        this.bandName = bandName;
     }
 
     public String getName() {
