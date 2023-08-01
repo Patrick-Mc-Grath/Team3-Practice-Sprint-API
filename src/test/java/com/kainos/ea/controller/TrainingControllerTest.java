@@ -28,7 +28,7 @@ public class TrainingControllerTest {
     TrainingController trainingController = new TrainingController(trainingService);
 
     @Test
-    void getTrainingByBand_shouldReturnOk_whenServiceReturnsListOfTrainingCourses() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException, FailedToGetTrainingException {
+    void getTrainingByBand_shouldReturnOk_whenServiceReturnsListOfTrainingCourses() throws TrainingDoesNotExistException, FailedToGetTrainingException {
         int bandId = 1;
         List<TrainingRequest> trainingList = new ArrayList<>();
 
@@ -43,9 +43,8 @@ public class TrainingControllerTest {
     }
 
     @Test
-    void getTrainingByBand_shouldReturn400_whenServiceThrowsTrainingDoesNotExistException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
+    void getTrainingByBand_shouldReturn400_whenServiceThrowsTrainingDoesNotExistException() throws TrainingDoesNotExistException, FailedToGetTrainingException {
         int bandId = 1;
-        List<TrainingRequest> trainingList = new ArrayList<>();
         int expected = Response.status(HttpStatus.BAD_REQUEST_400).build().getStatus();
 
         Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(TrainingDoesNotExistException.class);
@@ -56,23 +55,11 @@ public class TrainingControllerTest {
     }
 
     @Test
-    void getTrainingByBand_shouldReturn500_whenServiceThrowsSqlException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
+    void getTrainingByBand_shouldReturn500_whenServiceThrowsFailedToGetTrainingException() throws TrainingDoesNotExistException, FailedToGetTrainingException {
         int bandId = 1;
         int expected = 500;
 
-        Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(SQLException.class);
-
-        int actual = trainingController.getTrainingByBand(bandId).getStatus();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void getTrainingByBand_shouldReturn500_whenServiceThrowsDatabaseConnectionException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
-        int bandId = 1;
-        int expected = 500;
-
-        Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(DatabaseConnectionException.class);
+        Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(FailedToGetTrainingException.class);
 
         int actual = trainingController.getTrainingByBand(bandId).getStatus();
 

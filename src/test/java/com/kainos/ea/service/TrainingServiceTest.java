@@ -2,6 +2,7 @@ package com.kainos.ea.service;
 
 import com.kainos.ea.dao.TrainingDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
+import com.kainos.ea.exception.FailedToGetTrainingException;
 import com.kainos.ea.exception.TrainingDoesNotExistException;
 import com.kainos.ea.model.TrainingRequest;
 import com.kainos.ea.util.DatabaseConnector;
@@ -49,12 +50,12 @@ public class TrainingServiceTest {
     }
 
     @Test
-    void getTrainingByBand_shouldThrowSqlException_whenDaoThrowsSqlException() throws DatabaseConnectionException, SQLException {
+    void getTrainingByBand_shouldThrowFailedToGetTraining_whenDaoThrowsSqlException() throws DatabaseConnectionException, SQLException {
         int bandId = 1;
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(trainingDao.getTrainingByBand(bandId, conn)).thenThrow(SQLException.class);
 
-        assertThrows(SQLException.class,
+        assertThrows(FailedToGetTrainingException.class,
                 () -> trainingService.getTrainingByBand(bandId));
     }
 }
