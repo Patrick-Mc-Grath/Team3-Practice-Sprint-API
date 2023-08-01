@@ -79,39 +79,4 @@ public class TrainingControllerTest {
 
         assertEquals(expected, actual);
     }
-
-    @Test
-    void getTrainingCategories_shouldReturnOk_whenServiceReturnsListOfCategories() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException, FailedToGetTrainingException {
-        List<String> categories = new ArrayList<>();
-
-        int expected = Response.ok().entity(categories).build().getStatus();
-
-        Mockito.when(trainingService.getTrainingCategories()).thenReturn(categories);
-
-        int actual = trainingController.getTrainingCategories().getStatus();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void getTrainingCategories_shouldReturn500_whenServiceThrowsSqlException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
-        int expected = 500;
-
-        Mockito.when(trainingService.getTrainingCategories()).thenThrow(SQLException.class);
-
-        int actual = trainingController.getTrainingCategories().getStatus();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void getTrainingCategories_shouldReturn500_whenServiceThrowsDatabaseConnectionException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
-        int expected = 500;
-
-        Mockito.when(trainingService.getTrainingCategories()).thenThrow(DatabaseConnectionException.class);
-
-        int actual = trainingController.getTrainingCategories().getStatus();
-
-        assertEquals(expected, actual);
-    }
 }

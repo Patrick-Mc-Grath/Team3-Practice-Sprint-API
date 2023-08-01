@@ -28,9 +28,4 @@ public class TrainingService {
 
         return trainingList;
     }
-
-    public List<String> getTrainingCategories() throws DatabaseConnectionException, SQLException {
-
-        return trainingDao.getTrainingCategories(databaseConnector.getConnection());
-    }
 }

@@ -57,25 +57,4 @@ public class TrainingServiceTest {
         assertThrows(SQLException.class,
                 () -> trainingService.getTrainingByBand(bandId));
     }
-
-    @Test
-    void getTrainingCategories_shouldReturnCategories_whenDaoReturnsCategories() throws DatabaseConnectionException, SQLException {
-        List<String> expected = new ArrayList<>();
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(trainingDao.getTrainingCategories(conn)).thenReturn(expected);
-
-        List<String> actual = trainingDao.getTrainingCategories(conn);
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void getTrainingCategories_shouldThrowSqlException_whenDaoThrowsSqlException() throws DatabaseConnectionException, SQLException{
-        Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        Mockito.when(trainingDao.getTrainingCategories(conn)).thenThrow(SQLException.class);
-
-        assertThrows(SQLException.class,
-                () -> trainingService.getTrainingCategories());
-    }
-
 }

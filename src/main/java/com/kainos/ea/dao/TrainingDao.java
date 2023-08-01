@@ -31,20 +31,4 @@ public class TrainingDao {
 
         return trainingList;
     }
-
-    public List<String> getTrainingCategories(Connection c) throws SQLException {
-        Statement st = c.createStatement();
-
-        ArrayList<String> categories = new ArrayList<>();
-
-        String selectStatement = "SELECT name from Training_Categories";
-
-        ResultSet rs = st.executeQuery(selectStatement);
-
-        while (rs.next()){
-            categories.add(rs.getString("name"));
-        }
-
-        return categories;
-    }
 }
