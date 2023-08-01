@@ -17,7 +17,8 @@ public class JobRoleDao
         ResultSet rs = st.executeQuery(" SELECT Job_Roles.role_id, Job_Roles.role_title, Job_Roles.job_family_id, Capabilities.name " +
                                         " FROM Job_Families " +
                                         " INNER JOIN Job_Roles on Job_Roles.job_family_id = Job_Families.job_family_id " +
-                                        " INNER JOIN Capabilities on Capabilities.capability_id  = Job_Families.capability_id;");
+                                        " INNER JOIN Capabilities on Capabilities.capability_id  = Job_Families.capability_id " +
+                                        " ORDER BY Job_Roles.role_id ASC");
         
         List<JobRole> jobRoles = new ArrayList<>();
 
