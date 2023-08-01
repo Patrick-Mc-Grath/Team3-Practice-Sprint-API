@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api("Engineering Academy Dropwizard Competency API")
+@Api("API Hack Street Boys")
 @Path("/api")
 public class CompetencyController {
 
