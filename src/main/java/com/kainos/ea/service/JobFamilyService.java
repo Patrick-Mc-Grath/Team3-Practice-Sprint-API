@@ -4,8 +4,10 @@ import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.dao.JobFamilyDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.FailedToGetJobFamilyException;
+import com.kainos.ea.exception.JobFamilyNameException;
 import com.kainos.ea.model.Capabilities;
 import com.kainos.ea.model.JobFamily;
+import com.kainos.ea.model.JobFamilyRequest;
 import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.SQLException;
@@ -30,4 +32,7 @@ public class JobFamilyService {
         }
     }
 
+    public int createJobFamily (JobFamilyRequest jobFamilyRequest) throws DatabaseConnectionException, SQLException, JobFamilyNameException {
+        return jobFamilyDao.createFamily(jobFamilyRequest, databaseConnector.getConnection());
+    }
 }
