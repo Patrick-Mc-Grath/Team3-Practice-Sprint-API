@@ -24,6 +24,8 @@ hs_err_pid*
 
 target/*
 
+JavaWebService.iml
+
 .idea/*
 
 .DS_Store

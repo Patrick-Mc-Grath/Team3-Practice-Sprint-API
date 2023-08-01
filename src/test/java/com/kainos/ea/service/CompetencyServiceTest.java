@@ -34,7 +34,6 @@ public class CompetencyServiceTest {
         assertEquals(comps, compService.getAllCompsWithBand(bandId));
     }
 
-
     @Test
     void getCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsSQLException() throws SQLException, DatabaseConnectionException {
         Mockito.when(dbConnector.getConnection()).thenReturn(connection);
@@ -44,5 +43,12 @@ public class CompetencyServiceTest {
                 () -> compService.getAllCompsWithBand(bandId));
     }
 
+    @Test
+    void getCompsWithBand_shouldThrowFailedToGetCompsException_whenDaoThrowsDatabaseException() throws SQLException, DatabaseConnectionException {
+        Mockito.when(dbConnector.getConnection()).thenReturn(connection);
+        Mockito.when(compDao.getAllCompsAndBand(bandId, connection)).thenThrow(DatabaseConnectionException.class);
 
+        assertThrows(FailedToGetCompsException.class,
+                () -> compService.getAllCompsWithBand(bandId));
+    }
 }

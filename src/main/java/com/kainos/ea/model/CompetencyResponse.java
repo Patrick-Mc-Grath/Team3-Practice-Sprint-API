@@ -44,7 +44,3 @@ public class CompetencyResponse {
         this.bandName = bandName;
     }
 }
-
-
-
-
