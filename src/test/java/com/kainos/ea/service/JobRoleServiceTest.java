@@ -5,6 +5,7 @@ import com.kainos.ea.exception.FailedToCreateJobRoleException;
 import com.kainos.ea.exception.InvalidJobRoleException;
 import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.JobRoleRequest;
+import com.kainos.ea.model.JobRoleResponse;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.validator.JobRoleValidator;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ class JobRoleServiceTest {
     void getJobRole_Should_Return_Arraylist() throws DatabaseConnectionException, SQLException
     {
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
-        ArrayList<JobRole> empList = new ArrayList<>();
+        ArrayList<JobRoleResponse> empList = new ArrayList<>();
         Mockito.when(jobRoleDao.getRoles(conn)).thenReturn(empList);
 
         assertEquals(empList, jobRoleService.getJobRoles());
