@@ -3,7 +3,7 @@ package com.kainos.ea.service;
 import com.kainos.ea.dao.TrainingDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.TrainingDoesNotExistException;
-import com.kainos.ea.model.TrainingRequest;
+import com.kainos.ea.model.TrainingResponse;
 import com.kainos.ea.util.DatabaseConnector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,11 +29,11 @@ public class TrainingServiceTest {
     @Test
     void getTrainingByBand_shouldReturnTrainingCourses_whenDaoReturnsTrainingCourses() throws DatabaseConnectionException, SQLException {
         int bandId = 1;
-        List<TrainingRequest> expected = new ArrayList<>();
+        List<TrainingResponse> expected = new ArrayList<>();
         Mockito.when(databaseConnector.getConnection()).thenReturn(conn);
         Mockito.when(trainingDao.getTrainingByBand(bandId, conn)).thenReturn(expected);
 
-        List<TrainingRequest> result = trainingDao.getTrainingByBand(bandId, conn);
+        List<TrainingResponse> result = trainingDao.getTrainingByBand(bandId, conn);
 
         assertEquals(expected, result);
     }

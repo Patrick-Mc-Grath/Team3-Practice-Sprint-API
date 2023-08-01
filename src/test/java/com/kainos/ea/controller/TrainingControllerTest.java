@@ -1,12 +1,10 @@
 package com.kainos.ea.controller;
 
-import com.kainos.ea.dao.TrainingDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.FailedToGetTrainingException;
 import com.kainos.ea.exception.TrainingDoesNotExistException;
-import com.kainos.ea.model.TrainingRequest;
+import com.kainos.ea.model.TrainingResponse;
 import com.kainos.ea.service.TrainingService;
-import com.kainos.ea.util.DatabaseConnector;
 import org.eclipse.jetty.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +29,7 @@ public class TrainingControllerTest {
     @Test
     void getTrainingByBand_shouldReturnOk_whenServiceReturnsListOfTrainingCourses() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException, FailedToGetTrainingException {
         int bandId = 1;
-        List<TrainingRequest> trainingList = new ArrayList<>();
+        List<TrainingResponse> trainingList = new ArrayList<>();
 
         int expected = Response.ok().entity(trainingList).build().getStatus();
 
@@ -46,7 +44,7 @@ public class TrainingControllerTest {
     @Test
     void getTrainingByBand_shouldReturn400_whenServiceThrowsTrainingDoesNotExistException() throws DatabaseConnectionException, SQLException, TrainingDoesNotExistException {
         int bandId = 1;
-        List<TrainingRequest> trainingList = new ArrayList<>();
+        List<TrainingResponse> trainingList = new ArrayList<>();
         int expected = Response.status(HttpStatus.BAD_REQUEST_400).build().getStatus();
 
         Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(TrainingDoesNotExistException.class);

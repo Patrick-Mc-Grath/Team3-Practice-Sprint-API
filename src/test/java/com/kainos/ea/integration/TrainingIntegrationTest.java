@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.model.TrainingRequest;
+import com.kainos.ea.model.TrainingResponse;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -29,9 +29,9 @@ public class TrainingIntegrationTest {
         Invocation.Builder response = APP.client().target("http://localhost:8080/api/training/" + id)
             .request();
 
-        List<TrainingRequest> trainingRequests = response.get(List.class);
+        List<TrainingResponse> trainingRequests = response.get(List.class);
 
-        List<TrainingRequest> pojos = mapper.convertValue(trainingRequests, new TypeReference<List<TrainingRequest>>() { });
+        List<TrainingResponse> pojos = mapper.convertValue(trainingRequests, new TypeReference<List<TrainingResponse>>() { });
 
         Assertions.assertTrue(pojos.size() > 0);
         Assertions.assertEquals("Test professional skills training", pojos.get(0).getName());

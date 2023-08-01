@@ -3,13 +3,13 @@ package com.kainos.ea.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TrainingRequest {
+public class TrainingResponse {
     private String name;
     private String link;
     private String category;
 
     @JsonCreator
-    public TrainingRequest(@JsonProperty("name") String name, @JsonProperty("link") String link, @JsonProperty("category") String category) {
+    public TrainingResponse(@JsonProperty("name") String name, @JsonProperty("link") String link, @JsonProperty("category") String category) {
         setName(name);
         setLink(link);
         setCategory(category);
