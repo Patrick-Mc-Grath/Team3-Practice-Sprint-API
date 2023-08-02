@@ -4,9 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
+import com.kainos.ea.dao.JobRoleDao;
+import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.JobRoleRequest;
 import com.kainos.ea.model.JobRoleResponse;
+import com.kainos.ea.util.DatabaseConnector;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -18,15 +21,23 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
 public class JobRolesIntegrationTest {
+    JobRoleDao jobRoleDao = new JobRoleDao();
+    DatabaseConnector databaseConnector = new DatabaseConnector();
+    Connection c = databaseConnector.getConnection();
 
     static final DropwizardAppExtension<WebServiceConfiguration> APP = new DropwizardAppExtension<>(
             WebServiceApplication.class, null,
             new ResourceConfigurationSourceProvider()
     );
+
+    public JobRolesIntegrationTest() throws DatabaseConnectionException, SQLException {
+    }
 
     @Test
     void getEmployees_shouldReturnListOfEmployees()  {
@@ -60,6 +71,12 @@ public class JobRolesIntegrationTest {
                 .readEntity(Integer.class);
 
         Assertions.assertNotNull(response);
+        try {
+            jobRoleDao.deleteRoleBand(1, 1, c);
+            jobRoleDao.deleteRole(1, c);
+        } catch (SQLException e) {
+            System.err.println(e);
+        }
     }
 
     @Test

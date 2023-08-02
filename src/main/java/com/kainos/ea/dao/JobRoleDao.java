@@ -77,4 +77,26 @@ public class JobRoleDao
 
         return -1;
     }
+
+    public void deleteRole(int roleId, Connection c) throws SQLException {
+        String deleteStatement = "DELETE FROM Job_Roles WHERE role_id = ?";
+
+        PreparedStatement st = c.prepareStatement(deleteStatement);
+
+        st.setInt(1, roleId);
+
+        st.executeUpdate();
+    }
+
+    //Could add a date_created field to Role_Bands to better facilitate this, for future reference
+    public void deleteRoleBand(int roleId, int bandId, Connection c) throws SQLException {
+        String deleteStatement = "DELETE FROM Role_Bands WHERE role_id = ? AND band_id = ?";
+
+        PreparedStatement st = c.prepareStatement(deleteStatement);
+
+        st.setInt(1, roleId);
+        st.setInt(2, bandId);
+
+        st.executeUpdate();
+    }
 }
