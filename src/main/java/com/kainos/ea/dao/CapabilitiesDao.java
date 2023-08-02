@@ -28,7 +28,6 @@ public class CapabilitiesDao {
         }
         return capabilitiesList;
     }
-
     public int insertCapability(CapabilityRequest cap, Connection c) throws SQLException {
         String insertCapabilityQuery = "INSERT INTO Capabilities (name, description) values (?, ?)";
 

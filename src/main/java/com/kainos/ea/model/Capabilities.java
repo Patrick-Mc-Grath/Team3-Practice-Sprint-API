@@ -40,6 +40,5 @@ public class Capabilities {
         setCapabilityId(capabilityId);
         setName(name);
         setDescription(description);
-
     }
 }

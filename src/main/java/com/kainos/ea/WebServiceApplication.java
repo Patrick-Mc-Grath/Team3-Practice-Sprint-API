@@ -36,5 +36,4 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
         environment.jersey().register(new JobRolesController());
         environment.jersey().register(new CapabilityController());
     }
-
 }

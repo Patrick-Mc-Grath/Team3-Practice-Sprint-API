@@ -110,6 +110,5 @@ public class CapabilityIntegrationTest {
         Assertions.assertTrue(capabilities.size() > 0);
         Assertions.assertEquals("Applied Innovation", pojos.get(0).getName());
         Assertions.assertEquals(200, response.get().getStatus());
-
     }
 }

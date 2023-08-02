@@ -29,9 +29,7 @@ public class CapabilitiesService {
             throw new FailedToGetCapabilityException();
         }
     }
-
     public int insertCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
         return capabilitiesDao.insertCapability(cap, databaseConnector.getConnection());
     }
-
 }
