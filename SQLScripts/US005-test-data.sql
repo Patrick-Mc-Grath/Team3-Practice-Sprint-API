@@ -14,4 +14,4 @@
     ("Communicating and Influence", "Effective Leadership require individuals to be exceptional");
 
     INSERT INTO Band_Competencies(band_id, competency_id)
-    VALUES (1, 3), (2, 4), (3, 5), (4, 1), (5, 2);
+    VALUES (1, 3), (2, 4), (3, 5), (4, 1), (5, 2), (1, 1),(1,2),(1,4),(1,5),(1,6);
