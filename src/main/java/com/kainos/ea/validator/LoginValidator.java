@@ -1,10 +1,10 @@
 package com.kainos.ea.validator;
 
-import com.kainos.ea.model.Login;
+import com.kainos.ea.model.LoginRequest;
 
 public class LoginValidator
 {
-    public String isValidLogin(Login login)
+    public String isValidLogin(LoginRequest login)
     {
         if (login.getUsername() == null || login.getUsername().isEmpty())
         {

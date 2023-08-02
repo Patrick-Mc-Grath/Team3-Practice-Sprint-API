@@ -1,10 +1,8 @@
 package com.kainos.ea.controller;
 
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.exception.FailedToGenerateTokenException;
 import com.kainos.ea.exception.FailedToLoginException;
-import com.kainos.ea.exception.InvalidLoginException;
-import com.kainos.ea.model.Login;
+import com.kainos.ea.model.LoginRequest;
 import com.kainos.ea.service.AuthService;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
 import org.junit.jupiter.api.Assertions;
@@ -22,12 +20,11 @@ public class AuthControllerTest
 
     private AuthController authController = new AuthController(authService);
 
-    private Login testData = new Login("Test","Password");
+    private LoginRequest testData = new LoginRequest("Test","Password");
 
     @Test
     void check_for_SQL_Exception()
-            throws DatabaseConnectionException, SQLException, FailedToLoginException, FailedToGenerateTokenException,
-            InvalidLoginException
+            throws DatabaseConnectionException, SQLException, FailedToLoginException
     {
         Mockito.when(authService.Login(testData)).thenThrow(new SQLException());
         Response response = authController.login(testData);
@@ -36,8 +33,7 @@ public class AuthControllerTest
 
     @Test
     void check_for_Database_Connection_Exception()
-            throws DatabaseConnectionException, SQLException, FailedToLoginException, FailedToGenerateTokenException,
-            InvalidLoginException
+            throws DatabaseConnectionException, SQLException, FailedToLoginException
     {
         Mockito.when(authService.Login(testData)).thenThrow(new DatabaseConnectionException());
         Response response = authController.login(testData);
@@ -45,31 +41,19 @@ public class AuthControllerTest
     }
 
     @Test
-    void check_for_Failed_To_Generate_Token_Exception()
-            throws DatabaseConnectionException, SQLException, FailedToLoginException, FailedToGenerateTokenException,
-            InvalidLoginException
-    {
-        Mockito.when(authService.Login(testData)).thenThrow(new FailedToGenerateTokenException());
-        Response response = authController.login(testData);
-        Assertions.assertEquals(500,response.getStatus());
-    }
-
-    @Test
     void check_for_Failed_To_Login_Exception()
-            throws DatabaseConnectionException, SQLException, FailedToLoginException, FailedToGenerateTokenException,
-            InvalidLoginException
+            throws DatabaseConnectionException, SQLException, FailedToLoginException
     {
-        Mockito.when(authService.Login(testData)).thenThrow(new FailedToLoginException());
+        Mockito.when(authService.Login(testData)).thenThrow(new FailedToLoginException("Failed Login"));
         Response response = authController.login(testData);
         Assertions.assertEquals(400,response.getStatus());
     }
 
     @Test
     void check_for_Invalid_Login_Exception()
-            throws DatabaseConnectionException, SQLException, FailedToLoginException, FailedToGenerateTokenException,
-            InvalidLoginException
+            throws DatabaseConnectionException, SQLException, FailedToLoginException
     {
-        Mockito.when(authService.Login(testData)).thenThrow(new InvalidLoginException("email address not valid"));
+        Mockito.when(authService.Login(testData)).thenThrow(new FailedToLoginException("email address not valid"));
         Response response = authController.login(testData);
         Assertions.assertEquals(400,response.getStatus());
     }

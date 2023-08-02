@@ -21,7 +21,6 @@ BEGIN
     CREATE TABLE IF NOT EXISTS `Token` (
     `Username` varchar(64) NOT NULL,
     `Token` varchar(1000) DEFAULT NULL,
-    `Expiry` datetime NOT NULL,
     FOREIGN KEY (`Username`) REFERENCES `User`(`Username`)
     );
 

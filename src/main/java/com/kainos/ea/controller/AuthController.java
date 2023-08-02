@@ -2,11 +2,10 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.dao.AuthDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.exception.FailedToGenerateTokenException;
 import com.kainos.ea.exception.FailedToLoginException;
-import com.kainos.ea.exception.InvalidLoginException;
-import com.kainos.ea.model.Login;
+import com.kainos.ea.model.LoginRequest;
 import com.kainos.ea.service.AuthService;
+import com.kainos.ea.service.JwtService;
 import com.kainos.ea.util.DatabaseConnector;
 import com.kainos.ea.validator.LoginValidator;
 import io.swagger.annotations.Api;
@@ -25,7 +24,7 @@ public class AuthController
 
     public AuthController()
     {
-        authService = new AuthService(new AuthDao(), new DatabaseConnector(), new LoginValidator());
+        authService = new AuthService(new AuthDao(), new DatabaseConnector(), new LoginValidator(), new JwtService());
     }
 
     public AuthController(AuthService authService)
@@ -36,16 +35,16 @@ public class AuthController
     @POST
     @Path("/login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(Login login)
+    public Response login(LoginRequest login)
     {
         try
         {
             return Response.ok(authService.Login(login)).build();
-        } catch (FailedToLoginException | InvalidLoginException e)
+        } catch (FailedToLoginException e)
         {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (FailedToGenerateTokenException | SQLException | DatabaseConnectionException e)
+        } catch (SQLException | DatabaseConnectionException e)
         {
             System.err.println(e.getMessage());
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();

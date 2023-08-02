@@ -2,7 +2,7 @@ package com.kainos.ea.integration;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.model.Login;
+import com.kainos.ea.model.LoginRequest;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -26,7 +26,7 @@ public class AuthIntegrationTest
     @Test
     void postWithInvalidEmail()
     {
-        Login testData = new Login("Test", "test");
+        LoginRequest testData = new LoginRequest("Test", "test");
 
         Response response = APP.client().target("http://localhost:8080/api/login")
                 .request()
@@ -38,7 +38,7 @@ public class AuthIntegrationTest
     @Test
     void postWithValidEmailWrongPassword()
     {
-        Login testData = new Login("test@kainos.com", "password");
+        LoginRequest testData = new LoginRequest("test@kainos.com", "password");
 
         Response response = APP.client().target("http://localhost:8080/api/login")
                 .request()
@@ -50,7 +50,7 @@ public class AuthIntegrationTest
     @Test
     void postWithValidLogin()
     {
-        Login testData = new Login("mart@kainos.com", "password");
+        LoginRequest testData = new LoginRequest("mart@kainos.com", "password");
 
         String response = APP.client().target("http://localhost:8080/api/login")
                 .request()

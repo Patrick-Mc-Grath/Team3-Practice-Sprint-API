@@ -1,10 +1,9 @@
 package com.kainos.ea.exception;
 
-public class FailedToLoginException extends Exception
+public class FailedToLoginException extends Throwable
 {
-    @Override
-    public String getMessage()
+    public FailedToLoginException(String error)
     {
-        return "failed to login";
+        super(error);
     }
 }

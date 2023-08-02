@@ -39,5 +39,5 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_HOST: ${{ secrets.DB_HOST }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        SECRET: ${{ secrets.SECRET }}
+        SECRET: ${{ secrets.ENCRYPTION_SECRET }}
       run: mvn clean integration-test

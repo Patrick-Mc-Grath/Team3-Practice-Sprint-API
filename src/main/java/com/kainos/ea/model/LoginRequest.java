@@ -3,7 +3,7 @@ package com.kainos.ea.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Login {
+public class LoginRequest {
     private String username;
     private String password;
 
@@ -28,7 +28,7 @@ public class Login {
     }
 
     @JsonCreator
-    public Login(@JsonProperty("username") String username, @JsonProperty("password") String password)
+    public LoginRequest(@JsonProperty("username") String username, @JsonProperty("password") String password)
     {
         setUsername(username);
         setPassword(password);
