@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.model.JobRole;
+import com.kainos.ea.model.JobRoleResponse;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -27,10 +28,12 @@ public class JobRolesIntegrationTest {
         Invocation.Builder response = APP.client().target("http://localhost:8080/api/job-roles")
                 .request();
 
-        List<JobRole> jobRoles = response.get(List.class);
-        List<JobRole> pojos = mapper.convertValue(jobRoles, new TypeReference<List<JobRole>>() { });
+        List<JobRoleResponse> jobRoles = response.get(List.class);
+        List<JobRoleResponse> pojos = mapper.convertValue(jobRoles, new TypeReference<List<JobRoleResponse>>() { });
         
         Assertions.assertTrue(jobRoles.size() > 0);
+
+        Assertions.assertEquals(1, pojos.get(1).getRoleId());
 
         Assertions.assertEquals("Software Engineer", pojos.get(1).getRoleTitle());
 
