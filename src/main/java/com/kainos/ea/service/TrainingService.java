@@ -4,7 +4,7 @@ import com.kainos.ea.dao.TrainingDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.FailedToGetTrainingException;
 import com.kainos.ea.exception.TrainingDoesNotExistException;
-import com.kainos.ea.model.TrainingRequest;
+import com.kainos.ea.model.TrainingResponse;
 import com.kainos.ea.util.DatabaseConnector;
 
 import java.sql.SQLException;
@@ -20,18 +20,15 @@ public class TrainingService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<TrainingRequest> getTrainingByBand(int bandId) throws TrainingDoesNotExistException, FailedToGetTrainingException {
+    public List<TrainingResponse> getTrainingByBand(int bandId) throws TrainingDoesNotExistException, FailedToGetTrainingException {
         try{
-            List<TrainingRequest> trainingList = trainingDao.getTrainingByBand(bandId, databaseConnector.getConnection());
-
+            List<TrainingResponse> trainingList = trainingDao.getTrainingByBand(bandId, databaseConnector.getConnection());
             if (trainingList.isEmpty()) {
                 throw new TrainingDoesNotExistException();
             }
-
             return trainingList;
         } catch (SQLException | DatabaseConnectionException e) {
             throw new FailedToGetTrainingException();
         }
-
     }
 }
