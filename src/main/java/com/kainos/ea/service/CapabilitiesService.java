@@ -16,7 +16,7 @@ import java.util.List;
 public class CapabilitiesService {
 
     public CapabilitiesDao capabilitiesDao;
-    public CapabilityValidator capabilityValidator;
+    public CapabilityValidator capabilityValidator = new CapabilityValidator();
     public DatabaseConnector databaseConnector;
 
     public CapabilitiesService(CapabilitiesDao capabilitiesDao, DatabaseConnector databaseConnector) {
