@@ -2,6 +2,7 @@ package com.kainos.ea;
 
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
+import com.kainos.ea.service.CapabilitiesService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -35,5 +36,4 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
         environment.jersey().register(new JobRolesController());
         environment.jersey().register(new CapabilityController());
     }
-
 }

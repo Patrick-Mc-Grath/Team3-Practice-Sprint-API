@@ -1,42 +1,66 @@
 package com.kainos.ea.controller;
+
 import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.exception.FailedToGetCapabilityException;
+import com.kainos.ea.exception.CapabilityDescriptionLengthException;
+import com.kainos.ea.exception.CapabilityNameLengthException;
+import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.service.CapabilitiesService;
 import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.validator.CapabilityValidator;
 import io.swagger.annotations.Api;
 import org.eclipse.jetty.http.HttpStatus;
-
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import com.kainos.ea.exception.FailedToGetCapabilityException;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.SQLException;
-@Api("API Hack Street Boys")
+
+
+@Api("Backend API Capabilities")
 @Path("/api")
 public class CapabilityController {
 
     private CapabilitiesService capabilitiesService;
 
-    public CapabilityController()
-    {
+    public CapabilityController() {
         capabilitiesService = new CapabilitiesService(new CapabilitiesDao(), new DatabaseConnector());
     }
 
-    public CapabilityController(CapabilitiesService capabilitiesService) {this.capabilitiesService = capabilitiesService;}
+    public CapabilityController(CapabilitiesService capabilitiesService) {
+        this.capabilitiesService = capabilitiesService;
+    }
+
+    @POST
+    @Path("/capabilities")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createCapability(CapabilityRequest cap) {
+        try {
+            int id = capabilitiesService.insertCapability(cap);
+            return Response.status(HttpStatus.CREATED_201).entity(id).build();
+        } catch (DatabaseConnectionException | SQLException e) {
+            System.out.println(e);
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
+        } catch (CapabilityNameLengthException | CapabilityDescriptionLengthException e) {
+            return Response.status(HttpStatus.BAD_REQUEST_400).build();
+        }
+    }
 
     @GET
     @Path("/capabilities")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCapabilities()
+    public Response getCapabilities ()
     {
-        try
-        {
+        try {
             return Response.ok(capabilitiesService.getCapabilities()).build();
-        } catch (FailedToGetCapabilityException e)
-        {
+        } catch (FailedToGetCapabilityException e) {
             return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         }
     }
 }
+
