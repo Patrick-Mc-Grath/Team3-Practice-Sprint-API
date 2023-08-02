@@ -30,12 +30,12 @@ public class JobRolesIntegrationTest {
 
         List<JobRoleResponse> jobRoles = response.get(List.class);
         List<JobRoleResponse> pojos = mapper.convertValue(jobRoles, new TypeReference<List<JobRoleResponse>>() { });
-        
+
         Assertions.assertTrue(jobRoles.size() > 0);
 
-        Assertions.assertEquals("Software Engineer", pojos.get(1).getRoleTitle());
-
         Assertions.assertEquals(1, pojos.get(1).getRoleId());
+
+        Assertions.assertEquals("Software Engineer", pojos.get(1).getRoleTitle());
 
         Assertions.assertEquals(200, response.get().getStatus());
     }
