@@ -34,25 +34,18 @@ public class CapabilityController {
     public CapabilityController(CapabilitiesService capabilitiesService) {
         this.capabilitiesService = capabilitiesService;
     }
-    CapabilityValidator capabilityValidator = new CapabilityValidator();
 
     @POST
     @Path("/capabilities")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
+    public Response createCapability(CapabilityRequest cap) {
         try {
-            if (capabilityValidator.isValidCapability(cap)) {
-                try {
-                    int id = capabilitiesService.insertCapability(cap);
-                    return Response.status(HttpStatus.CREATED_201).entity(id).build();
-                } catch (DatabaseConnectionException | SQLException e) {
-                    System.out.println(e);
-                    return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
-                }
-            } else {
-                return Response.status(HttpStatus.BAD_REQUEST_400).build();
-            }
+            int id = capabilitiesService.insertCapability(cap);
+            return Response.status(HttpStatus.CREATED_201).entity(id).build();
+        } catch (DatabaseConnectionException | SQLException e) {
+            System.out.println(e);
+            return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
         } catch (CapabilityNameLengthException | CapabilityDescriptionLengthException e) {
             return Response.status(HttpStatus.BAD_REQUEST_400).build();
         }

@@ -8,6 +8,7 @@ import com.kainos.ea.exception.CapabilityNameLengthException;
 import com.kainos.ea.model.Capabilities;
 import com.kainos.ea.model.CapabilityRequest;
 import com.kainos.ea.util.DatabaseConnector;
+import com.kainos.ea.validator.CapabilityValidator;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class CapabilitiesService {
 
     public CapabilitiesDao capabilitiesDao;
+    public CapabilityValidator capabilityValidator;
     public DatabaseConnector databaseConnector;
 
     public CapabilitiesService(CapabilitiesDao capabilitiesDao, DatabaseConnector databaseConnector) {
@@ -30,6 +32,10 @@ public class CapabilitiesService {
         }
     }
     public int insertCapability(CapabilityRequest cap) throws DatabaseConnectionException, SQLException, CapabilityNameLengthException, CapabilityDescriptionLengthException {
-        return capabilitiesDao.insertCapability(cap, databaseConnector.getConnection());
+        if (capabilityValidator.isValidCapability(cap)) {
+            return capabilitiesDao.insertCapability(cap, databaseConnector.getConnection());
+        } else {
+            return -1;
+        }
     }
 }
