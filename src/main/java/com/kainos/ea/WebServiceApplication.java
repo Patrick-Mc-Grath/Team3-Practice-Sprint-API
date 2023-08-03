@@ -1,5 +1,5 @@
 package com.kainos.ea;
-
+import com.kainos.ea.controller.CompetencyController;
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
 import io.dropwizard.Application;
@@ -22,22 +22,22 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     return "WebService";
   }
 
-  @Override
-  public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
-    bootstrap.addBundle(new SwaggerBundle<WebServiceConfiguration>() {
-        @Override
-        protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
-              WebServiceConfiguration configuration
-        ) {
-            return configuration.getSwagger();
-        }
-    });
-  }
+    @Override
+    public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new SwaggerBundle<WebServiceConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(WebServiceConfiguration configuration) {
+                return configuration.getSwagger();
+            }
+        });
+    }
 
-  @Override
-  public void run(final WebServiceConfiguration configuration,
-                  final Environment environment) {
-    environment.jersey().register(new JobRolesController());
-    environment.jersey().register(new CapabilityController());
-  }
+    @Override
+    public void run(final WebServiceConfiguration configuration,
+                    final Environment environment) {
+
+        environment.jersey().register(new CompetencyController());
+        environment.jersey().register(new JobRolesController());
+        environment.jersey().register(new CapabilityController());
+    }
 }

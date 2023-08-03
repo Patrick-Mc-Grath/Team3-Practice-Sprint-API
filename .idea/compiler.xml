@@ -9,5 +9,8 @@
         <module name="JavaWebService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="JavaWebService" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
