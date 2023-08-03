@@ -31,7 +31,7 @@ jobs:
         DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
         DB_HOST: ${{ secrets.DB_HOST }}
         DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        SECRET: ${{ secrets.ENCRYPTION_SECRET }}
+        ENCRYPTION_SECRET: ${{ secrets.ENCRYPTION_SECRET }}
         TEST_USER: ${{ secrets.TEST_USER }}
         TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
 
