@@ -3,7 +3,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.JobRoleResponse;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
@@ -33,7 +32,7 @@ public class JobRolesIntegrationTest {
         
         Assertions.assertTrue(jobRoles.size() > 0);
 
-        Assertions.assertEquals(1, pojos.get(1).getRoleId());
+        Assertions.assertEquals(2, pojos.get(1).getRoleId());
 
         Assertions.assertEquals("Software Engineer", pojos.get(1).getRoleTitle());
 
