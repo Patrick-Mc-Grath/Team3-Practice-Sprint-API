@@ -33,13 +33,5 @@ public class CapabilitiesService {
     } catch (SQLException | DatabaseConnectionException e) {
       throw new FailedToGetCapabilityException();
     }
-
-    public List<Capabilities> getCapabilities() throws FailedToGetCapabilityException {
-        try {
-            return capabilitiesDao.getCapabilities(databaseConnector.getConnection());
-        } catch (SQLException | DatabaseConnectionException e) {
-            throw new FailedToGetCapabilityException();
-        }
-    }
   }
 }
