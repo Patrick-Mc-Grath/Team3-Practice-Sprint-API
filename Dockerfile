@@ -15,9 +15,12 @@ ENV DB_USERNAME ${DB_USERNAME}
 ARG DB_PASSWORD
 ENV DB_PASSWORD ${DB_PASSWORD}
 
+ARG SECRET
+ENV SECRET ${SECRET}
+
 RUN mvn clean install -DskipTests=true
+RUN mvn -B package --file pom.xml
 EXPOSE 8080
-RUN mvn clean integration-test
 
 
 CMD ["java","-jar", "/code/target/JavaWebService-1.0-SNAPSHOT.jar", "server", "/code/config.yml"]
