@@ -14,14 +14,14 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
  */
 public class WebServiceApplication extends Application<WebServiceConfiguration> {
 
-  public static void main(final String[] args) throws Exception {
-    new WebServiceApplication().run(args);
-  }
+    public static void main(final String[] args) throws Exception {
+        new WebServiceApplication().run(args);
+    }
 
-  @Override
-  public String getName() {
-    return "WebService";
-  }
+    @Override
+    public String getName() {
+        return "WebService";
+    }
 
   @Override
   public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
