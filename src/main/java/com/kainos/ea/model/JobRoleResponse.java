@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JobRoleResponse {
   private int roleId;
   private String roleTitle;
+  private int bandId;
   private String bandName;
   private String jobFamilyName;
   private String capabilityName;
@@ -27,6 +28,14 @@ public class JobRoleResponse {
 
   public void setRoleTitle(String roleTitle) {
     this.roleTitle = roleTitle;
+  }
+
+  public int getBandId() {
+    return bandId;
+  }
+
+  public void setBandId(int bandId) {
+    this.bandId = bandId;
   }
 
   public String getBandName() {
@@ -70,6 +79,7 @@ public class JobRoleResponse {
   public JobRoleResponse(
       @JsonProperty("role_id") int roleId,
       @JsonProperty("role_title") String roleTitle,
+      @JsonProperty("band_id") int bandId,
       @JsonProperty("band_name") String bandName,
       @JsonProperty("job_family_name") String jobFamilyName,
       @JsonProperty("capability_name") String capabilityName) {

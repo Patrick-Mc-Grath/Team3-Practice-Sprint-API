@@ -22,7 +22,7 @@ public class JobRoleDao {
     Statement st = c.createStatement();
 
     ResultSet rs = st.executeQuery(
-        "SELECT Job_Roles.role_id, role_title, Bands.band_name, "
+        "SELECT Job_Roles.role_id, role_title, Bands.band_id, Bands.band_name, "
           + "Job_Families.name AS `job_family_name`, Capabilities.name AS `capability_name`"
           + " FROM Job_Roles"
           + " INNER JOIN Role_Bands USING(role_id)"
