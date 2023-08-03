@@ -2,6 +2,7 @@ package com.kainos.ea;
 
 import com.kainos.ea.controller.BandController;
 import com.kainos.ea.controller.JobFamilyController;
+import com.kainos.ea.controller.CompetencyController;
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
 import io.dropwizard.Application;
