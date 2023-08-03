@@ -16,7 +16,7 @@ ARG DB_PASSWORD
 ENV DB_PASSWORD ${DB_PASSWORD}
 
 ARG SECRET
-ENV SECRET ${SECRET}
+ENV SECRET ${ENCRYPTION_SECRET}
 
 RUN mvn clean install -DskipTests=true
 RUN mvn -B package --file pom.xml
