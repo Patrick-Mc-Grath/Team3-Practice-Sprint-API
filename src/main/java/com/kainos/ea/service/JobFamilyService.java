@@ -1,17 +1,16 @@
 package com.kainos.ea.service;
 
-import com.kainos.ea.dao.CapabilitiesDao;
 import com.kainos.ea.dao.JobFamilyDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.exception.FailedToGetJobFamilyException;
-import com.kainos.ea.model.Capabilities;
+
 import com.kainos.ea.model.JobFamily;
 import com.kainos.ea.util.DatabaseConnector;
-
 import java.sql.SQLException;
 import java.util.List;
 
 public class JobFamilyService {
+
 
     public JobFamilyDao jobFamilyDao;
 
@@ -29,5 +28,4 @@ public class JobFamilyService {
             throw new FailedToGetJobFamilyException();
         }
     }
-
 }

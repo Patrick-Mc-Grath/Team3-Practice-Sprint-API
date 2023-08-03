@@ -1,12 +1,11 @@
-CREATE TABLE Capabilities (
+CREATE TABLE IF NOT EXISTS Capabilities (
 	capability_id smallint AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	name varchar(50) NOT NULL,
 	description varchar(100) NOT NULL
-
 );
 
-CREATE TABLE Job_Families (
-	job_family_id smallint NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Job_Families (
+	job_family_id smallint NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	capability_id smallint NOT NULL,
 	name varchar(50) NOT NULL
 
