@@ -38,6 +38,8 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
   public void run(final WebServiceConfiguration configuration,
                   final Environment environment) {
     environment.jersey().register(new JobRolesController());
+    environment.jersey().register(new BandController());
+    environment.jersey().register(new JobFamilyController());
     environment.jersey().register(new CapabilityController());
   }
 }
