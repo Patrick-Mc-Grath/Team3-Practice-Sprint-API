@@ -3,44 +3,68 @@ package com.kainos.ea.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JobRole
-{
-    private int roleId;
-    private String roleTitle;
-    private String capabilityName;
+/**
+ * JobRole class.
+ */
+public class JobRole {
+  private int roleId;
+  private String roleTitle;
+  private int jobFamilyId;
+  private String capabilityName;
 
+  /**
+   * JobRole constructor.
+   *
+   * @param roleId the role id
+   *
+   * @param roleTitle the role title
+   *
+   * @param jobFamilyId the job family id
+   *
+   * @param capabilityName the capability name
+   */
+  @JsonCreator
+  public JobRole(
+                 @JsonProperty("role_id") int roleId,
+                 @JsonProperty("role_title") String roleTitle,
+                 @JsonProperty("jobFamilyId") int jobFamilyId,
+                 @JsonProperty("Capabilities.name") String capabilityName) {
+    setRoleId(roleId);
+    setRoleTitle(roleTitle);
+    setJobFamilyId(jobFamilyId);
+    setCapabilityName(capabilityName);
+  }
 
-    @JsonCreator
-    public JobRole(
-                   @JsonProperty("role_id") int roleId,
-                   @JsonProperty("role_title") String roleTitle,
-                   @JsonProperty("Capabilities.name") String capabilityName)
-                
+  public int getRoleId() {
+    return roleId;
+  }
 
-    {
-        setRoleId(roleId);
-        setRoleTitle(roleTitle);
-        setCapabilityName(capabilityName);
+  public void setRoleId(int roleId) {
+    this.roleId = roleId;
+  }
 
-    }
+  public String getRoleTitle() {
+    return roleTitle;
+  }
 
-    public int getRoleId() {
-        return roleId;
-    }
+  public void setRoleTitle(String roleTitle) {
+    this.roleTitle = roleTitle;
+  }
 
-    public void setRoleId(int roleID) {
-        this.roleId = roleID;
-    }
+  public int getJobFamilyId() {
+    return jobFamilyId;
+  }
 
-    public String getRoleTitle() {
-        return roleTitle;
-    }
+  public void setJobFamilyId(int jobFamilyId) {
+    this.jobFamilyId = jobFamilyId;
+  }
 
-    public void setRoleTitle(String roleTitle) {
-        this.roleTitle = roleTitle;
-    }
+  public String getCapabilityName() {
+    return capabilityName;
+  }
 
-    public String getCapabilityName() {return capabilityName;}
+  public void setCapabilityName(String capabilityName) {
+    this.capabilityName = capabilityName;
+  }
 
-    public void setCapabilityName(String capabilityName) {this.capabilityName = capabilityName; }
 }
