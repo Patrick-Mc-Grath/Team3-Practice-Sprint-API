@@ -27,5 +27,4 @@ public class CapabilitiesService {
             throw new FailedToGetCapabilityException();
         }
     }
-
 }
