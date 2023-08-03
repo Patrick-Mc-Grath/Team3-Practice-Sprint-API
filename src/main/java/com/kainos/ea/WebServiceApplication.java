@@ -9,6 +9,9 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
+/**
+ * The main application class for the web service.
+ */
 public class WebServiceApplication extends Application<WebServiceConfiguration> {
 
     public static void main(final String[] args) throws Exception {
@@ -19,6 +22,7 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     public String getName() {
         return "WebService";
     }
+
 
     @Override
     public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
@@ -37,5 +41,4 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
         environment.jersey().register(new CapabilityController());
         environment.jersey().register(new JobFamilyController());
     }
-
 }
