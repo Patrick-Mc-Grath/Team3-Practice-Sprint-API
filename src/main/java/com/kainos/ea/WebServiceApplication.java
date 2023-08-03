@@ -1,4 +1,7 @@
 package com.kainos.ea;
+
+import com.kainos.ea.controller.BandController;
+import com.kainos.ea.controller.JobFamilyController;
 import com.kainos.ea.controller.CompetencyController;
 import com.kainos.ea.controller.CapabilityController;
 import com.kainos.ea.controller.JobRolesController;
@@ -23,20 +26,23 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     return "WebService";
   }
 
-  @Override
-  public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
-    bootstrap.addBundle(new SwaggerBundle<WebServiceConfiguration>() {
-        @Override
-        protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
-            WebServiceConfiguration configuration) {
-            return configuration.getSwagger();
-        }
-    });
-  }
+    @Override
+    public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
+        bootstrap.addBundle(new SwaggerBundle<WebServiceConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(WebServiceConfiguration configuration) {
+                return configuration.getSwagger();
+            }
+        });
+    }
+
 
   @Override
   public void run(final WebServiceConfiguration configuration,
                   final Environment environment) {
+    environment.jersey().register(new JobRolesController());
+    environment.jersey().register(new BandController());
+    environment.jersey().register(new JobFamilyController());
     environment.jersey().register(new CompetencyController());
     environment.jersey().register(new TrainingController());
     environment.jersey().register(new JobRolesController());
