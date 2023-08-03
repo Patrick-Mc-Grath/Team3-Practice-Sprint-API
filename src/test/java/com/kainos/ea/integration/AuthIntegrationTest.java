@@ -50,7 +50,7 @@ public class AuthIntegrationTest
     @Test
     void postWithValidLogin()
     {
-        LoginRequest testData = new LoginRequest("mart@kainos.com", "password");
+        LoginRequest testData = new LoginRequest(System.getenv("TEST_USER"),System.getenv("TEST_PASSWORD"));
 
         String response = APP.client().target("http://localhost:8080/api/login")
                 .request()
