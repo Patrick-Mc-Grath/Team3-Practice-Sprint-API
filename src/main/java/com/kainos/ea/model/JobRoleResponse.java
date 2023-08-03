@@ -85,6 +85,7 @@ public class JobRoleResponse {
       @JsonProperty("capability_name") String capabilityName) {
     setRoleId(roleId);
     setRoleTitle(roleTitle);
+    setBandId(bandId);
     setBandName(bandName);
     setJobFamilyName(jobFamilyName);
     setCapabilityName(capabilityName);
