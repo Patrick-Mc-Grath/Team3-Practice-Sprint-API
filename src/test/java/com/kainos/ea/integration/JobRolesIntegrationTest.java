@@ -6,7 +6,6 @@ import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
 import com.kainos.ea.dao.JobRoleDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
-import com.kainos.ea.model.JobRole;
 import com.kainos.ea.model.JobRoleRequest;
 import com.kainos.ea.model.JobRoleResponse;
 import com.kainos.ea.util.DatabaseConnector;
@@ -50,7 +49,7 @@ public class JobRolesIntegrationTest {
         
         Assertions.assertTrue(jobRoles.size() > 0);
 
-        Assertions.assertEquals(1, pojos.get(1).getRoleId());
+        Assertions.assertEquals(2, pojos.get(1).getRoleId());
 
         Assertions.assertEquals("Software Engineer", pojos.get(1).getRoleTitle());
 
