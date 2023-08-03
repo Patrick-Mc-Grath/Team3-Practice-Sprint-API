@@ -37,6 +37,7 @@ public class JobRoleDao {
                 JobRoleResponse role = new JobRoleResponse(
                         rs.getInt("role_id"),
                         rs.getString("role_title"),
+                        rs.getInt("band_id"),
                         rs.getString("band_name"),
                         rs.getString("job_family_name"),
                         rs.getString("capability_name")
