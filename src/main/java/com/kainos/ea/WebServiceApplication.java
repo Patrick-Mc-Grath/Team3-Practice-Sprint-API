@@ -4,6 +4,7 @@ import com.kainos.ea.controller.BandController;
 import com.kainos.ea.controller.JobFamilyController;
 import com.kainos.ea.controller.CompetencyController;
 import com.kainos.ea.controller.CapabilityController;
+import com.kainos.ea.controller.JobFamilyController;
 import com.kainos.ea.controller.JobRolesController;
 import com.kainos.ea.controller.TrainingController;
 import io.dropwizard.Application;
@@ -17,14 +18,14 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
  */
 public class WebServiceApplication extends Application<WebServiceConfiguration> {
 
-  public static void main(final String[] args) throws Exception {
-    new WebServiceApplication().run(args);
-  }
+    public static void main(final String[] args) throws Exception {
+        new WebServiceApplication().run(args);
+    }
 
-  @Override
-  public String getName() {
-    return "WebService";
-  }
+    @Override
+    public String getName() {
+        return "WebService";
+    }
 
     @Override
     public void initialize(final Bootstrap<WebServiceConfiguration> bootstrap) {
@@ -47,6 +48,7 @@ public class WebServiceApplication extends Application<WebServiceConfiguration> 
     environment.jersey().register(new TrainingController());
     environment.jersey().register(new JobRolesController());
     environment.jersey().register(new CapabilityController());
+    environment.jersey().register(new JobFamilyController());
   }
 }
 

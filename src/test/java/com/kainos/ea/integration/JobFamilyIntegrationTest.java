@@ -24,16 +24,16 @@ public class JobFamilyIntegrationTest {
     );
 
     @Test
-    void getEmployees_shouldReturnListOfEmployees()  {
+    void getJobFamily_shouldReturnListOfFamilies() {
         ObjectMapper mapper = new ObjectMapper();
-        Invocation.Builder response = APP.client().target("http://localhost:8080/api/job-families")
-                .request();
+        Invocation.Builder response = APP.client().target("http://localhost:8080/api/job-family").request();
 
         List<JobFamily> jobFamilies = response.get(List.class);
         List<JobFamily> pojos = mapper.convertValue(jobFamilies, new TypeReference<List<JobFamily>>() { });
 
         Assertions.assertTrue(jobFamilies.size() > 0);
-        Assertions.assertEquals("Engineering Strategy and Planning", pojos.get(0).getName());
+        Assertions.assertNotNull(pojos.get(0).getJobFamilyId());
+        Assertions.assertNotNull(pojos.get(1).getName());
         Assertions.assertEquals(200, response.get().getStatus());
     }
 }

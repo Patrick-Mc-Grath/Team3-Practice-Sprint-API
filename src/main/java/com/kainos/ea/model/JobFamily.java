@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JobFamily {
     private int jobFamilyId;
+    private String capabilityName;
     private int capabilityId;
     private String name;
 
@@ -14,6 +15,14 @@ public class JobFamily {
 
     public void setJobFamilyId(int jobFamilyId) {
         this.jobFamilyId = jobFamilyId;
+    }
+
+    public String getCapabilityName() {
+        return capabilityName;
+    }
+
+    public void setCapabilityName(String capabilityName) {
+      this.capabilityName = capabilityName;
     }
 
     public int getCapabilityId() {
@@ -33,10 +42,13 @@ public class JobFamily {
     }
 
     @JsonCreator
-    public JobFamily(
-            @JsonProperty("job_family_id") int jobFamilyId,
-            @JsonProperty("capability_id") int capabilityId,
-            @JsonProperty("name") String name) {
+    public JobFamily(@JsonProperty ("job_family_id") int jobFamilyId,
+                     @JsonProperty ("Capabilities.name") String capabilityName,
+                     @JsonProperty ("Capabilities.capability_id") int capabilityId,
+                     @JsonProperty ("name") String name)
+    {
+        setJobFamilyId(jobFamilyId);
+        setCapabilityName(capabilityName);
         setJobFamilyId(jobFamilyId);
         setCapabilityId(capabilityId);
         setName(name);

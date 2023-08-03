@@ -10,24 +10,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobFamilyDao {
+
     public List<JobFamily> getJobFamilies(Connection c) throws SQLException {
         Statement st = c.createStatement();
 
         ResultSet rs = st.executeQuery(
-                "SELECT job_family_id, capability_id, name"
-                        + " FROM Job_Families;");
+                " SELECT job_family_id, Capabilities.name, Capabilities.capability_id, Job_Families.name "
+                        + " FROM Job_Families " +
+                        " INNER JOIN Capabilities on Capabilities.capability_id = Job_Families.capability_id;");
 
-        List<JobFamily> jobFamilies = new ArrayList<>();
+        List<JobFamily> jobFamilyList = new ArrayList<>();
 
         while (rs.next()) {
             JobFamily jobFamily = new JobFamily(
                     rs.getInt("job_family_id"),
-                    rs.getInt("capability_id"),
-                    rs.getString("name")
+                    rs.getString("Capabilities.name"),
+                    rs.getInt("Capabilities.capability_id"),
+                    rs.getString("Job_Families.name")
             );
 
-            jobFamilies.add(jobFamily);
+            jobFamilyList.add(jobFamily);
         }
-        return jobFamilies;
+
+        return jobFamilyList;
+
+        }
     }
-}
+
