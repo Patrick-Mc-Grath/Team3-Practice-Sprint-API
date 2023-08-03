@@ -2,10 +2,8 @@ package com.kainos.ea.controller;
 
 import com.kainos.ea.WebServiceApplication;
 import com.kainos.ea.WebServiceConfiguration;
-import com.kainos.ea.dao.JobRoleDao;
 import com.kainos.ea.exception.DatabaseConnectionException;
 import com.kainos.ea.service.JobRoleService;
-import com.kainos.ea.util.DatabaseConnector;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
@@ -15,7 +13,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 
 import javax.ws.rs.core.Response;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 @ExtendWith(DropwizardExtensionsSupport.class)
