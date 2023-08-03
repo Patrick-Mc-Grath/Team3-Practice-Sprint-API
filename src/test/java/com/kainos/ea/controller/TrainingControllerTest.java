@@ -24,7 +24,6 @@ public class TrainingControllerTest {
 
     TrainingService trainingService = Mockito.mock(TrainingService.class);
     TrainingController trainingController = new TrainingController(trainingService);
-    Connection conn;
 
     @Test
     void getTrainingByBand_shouldReturnOk_whenServiceReturnsListOfTrainingCourses() throws TrainingDoesNotExistException, FailedToGetTrainingException {
@@ -44,7 +43,7 @@ public class TrainingControllerTest {
     @Test
     void getTrainingByBand_shouldReturn400_whenServiceThrowsTrainingDoesNotExistException() throws TrainingDoesNotExistException, FailedToGetTrainingException {
         int bandId = 1;
-        List<TrainingResponse> trainingList = new ArrayList<>();
+
         int expected = Response.status(HttpStatus.BAD_REQUEST_400).build().getStatus();
 
         Mockito.when(trainingService.getTrainingByBand(bandId)).thenThrow(TrainingDoesNotExistException.class);
@@ -65,5 +64,4 @@ public class TrainingControllerTest {
 
         assertEquals(expected, actual);
     }
-
 }

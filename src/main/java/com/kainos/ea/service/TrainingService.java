@@ -36,7 +36,6 @@ public class TrainingService {
       if (trainingList.isEmpty()) {
         throw new TrainingDoesNotExistException();
       }
-
       return trainingList;
     } catch (SQLException | DatabaseConnectionException e) {
       throw new FailedToGetTrainingException();

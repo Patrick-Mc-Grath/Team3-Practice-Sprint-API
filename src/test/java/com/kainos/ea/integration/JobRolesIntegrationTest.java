@@ -32,7 +32,7 @@ public class JobRolesIntegrationTest {
         
         Assertions.assertTrue(jobRoles.size() > 0);
 
-        Assertions.assertNotNull(pojos.get(1).getRoleId());
+        Assertions.assertEquals(2, pojos.get(1).getRoleId());
 
         Assertions.assertNotNull(pojos.get(1).getRoleTitle());
 

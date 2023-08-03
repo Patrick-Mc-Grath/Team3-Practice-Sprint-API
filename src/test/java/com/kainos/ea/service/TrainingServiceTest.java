@@ -58,5 +58,4 @@ public class TrainingServiceTest {
         assertThrows(FailedToGetTrainingException.class,
                 () -> trainingService.getTrainingByBand(bandId));
     }
-
 }

@@ -51,5 +51,4 @@ public class TrainingController {
       return Response.status(HttpStatus.INTERNAL_SERVER_ERROR_500).build();
     }
   }
-
 }
